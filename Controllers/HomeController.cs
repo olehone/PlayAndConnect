@@ -8,6 +8,7 @@ namespace PlayAndConnect.Controllers
 {
     public class HomeController : Controller
     {
+        //Request.Cookies["username"]
         private readonly ApplicationDbContext _db;
         private readonly HttpContext _httpContext;
         public HomeController(ApplicationDbContext db, IHttpContextAccessor httpContext)
@@ -23,7 +24,7 @@ namespace PlayAndConnect.Controllers
         public IActionResult Login(User user)
         {
             _httpContext.Response.Cookies.Append("login", "value");
-            return View();//new RedirectResult("/");
+            return new RedirectResult("/");
         }
         public IActionResult Register()
         {
