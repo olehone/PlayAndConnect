@@ -8,39 +8,53 @@ namespace PlayAndConnect.Controllers
 {
     public class HomeController : Controller
     {
-        //Request.Cookies["username"]
+        //_httpContext.Request.Cookies["username"]
         private readonly ApplicationDbContext _db;
         private readonly HttpContext _httpContext;
+        private readonly UserDb _userDb;
         public HomeController(ApplicationDbContext db, IHttpContextAccessor httpContext)
         {
             _db = db;
             _httpContext = httpContext.HttpContext;
-        }
+            _userDb = new UserDb(_db);
+        }  
         public IActionResult Login()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult Login(User user)
+        public async Task<IActionResult> Login(string username, string password)
         {
-            _httpContext.Response.Cookies.Append("login", "value");
-            return new RedirectResult("/");
+            //add username in cookies and redirect if allgood
+            if (username ==""|| password =="1")//await _userDb.Verify(username, password))
+            {
+                _httpContext.Response.Cookies.Append("username", username);
+                return new RedirectResult("Index");
+            }
+            else
+                return new RedirectResult("Login");
         }
-        public IActionResult Register()
+        public IActionResult Singup()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Register(User user)
+        public async Task<IActionResult> Singup(User user)
         {
-            UserDb userDb = new UserDb(_db);
-            await userDb.Create(user);
-            _httpContext.Response.Cookies.Append("login", "value");
-            return View();
+            await _userDb.Create(user);
+            _httpContext.Response.Cookies.Append("username", "value");
+            return View("Login");
         }
+
         public IActionResult Index()
         {
-            return View();
+            if(_httpContext.Request.Cookies["username"]!=null)
+            {
+                ViewBag.username = _httpContext.Request.Cookies["username"];
+                return View("Index");
+            }   
+            else
+                return View("IndexForNew");
         }
 
         public IActionResult Privacy()

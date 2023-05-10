@@ -77,7 +77,7 @@ namespace PlayAndConnect.Data.Interfaces
         }
         public async Task<User?> GetByName(string name)
         {
-            User? user = await _db.Users.Where(u => u.Name == name).FirstOrDefaultAsync();
+            User? user = await _db.Users.FirstOrDefaultAsync(u => u.Name == name);
             return user;
         }
         public async Task<bool> Verify(string name, string password)

@@ -1,71 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" href="style.css" />
-
-    <link
-      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="topnav">
-        <a href="signup.html">SIGN UP</a>
-        <a class="active" href="login.html">LOG IN</a>
-        <a href="#contact">ABOUS US</a>
-        <a href="#faq">FAQ</a>
-      </div>
-      
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content=\"width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://example.com/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title>Login Form</title>
+</head>
+<body>
     <div class="container">
-      <h2>Login</h2>
-      <form action="main.html">
-            <div class="field username-field">
-              <div class="input-field">
-                <input type="text" placeholder="Enter your username" class="username" />
-              </div>
-              <span class="error username-error">
-                <i class="bx bx-error-circle error-icon"></i>
-                <p class="error-text">Please enter a valid username</p>                
-              </span>
-            </div>
-
-        <div class="field create-password">
-          <div class="input-field">
-            <input
-              type="password"
-              placeholder="Create password"
-              class="password"
-            />
-            <i class="bx bx-hide show-hide"></i>
-          </div>
-          <span class="error password-error">
-            <i class="bx bx-error-circle error-icon"></i>
-            <p class="error-text">
-              Please enter atleast 8 charatcer with number, symbol, small and
-              capital letter.
-            </p>
-          </span>
-        </div>
-
-        <div class="recover">
-            <a href="#">Forgot Password?</a>
-        </div>
-        
-        <div class="input-field button">
-          <input type="submit" value="Submit Now" />
-        </div>
-
-        <div class="member">
-            Not a a member?  <a href="signup.html"> 
-                Register Now
-            </a>
-        </div>
-      </form>
-    </div>
-    <script src="login.js"></script>
-  </body>
+        <h1>Login Form</h1>
+        <form method="post" action="@Url.Action("Login")">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Log In</button>
+        </form></div>
+</body>
 </html>

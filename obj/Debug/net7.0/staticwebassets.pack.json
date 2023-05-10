@@ -5,12 +5,32 @@
       "PackagePath": "staticwebassets\\PlayAndConnect.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\css\\navigation.css",
+      "PackagePath": "staticwebassets\\css\\navigation.css"
+    },
+    {
       "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
       "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\js\\form.js",
+      "PackagePath": "staticwebassets\\js\\form.js"
+    },
+    {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\js\\login.js",
+      "PackagePath": "staticwebassets\\js\\login.js"
+    },
+    {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\js\\script.js",
+      "PackagePath": "staticwebassets\\js\\script.js"
     },
     {
       "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\js\\site.js",
