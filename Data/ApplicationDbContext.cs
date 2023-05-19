@@ -15,9 +15,33 @@ namespace PlayAndConnect.Data
             Database.EnsureCreated();
         }
         public DbSet<User> Users => Set<User>();
+        public DbSet<UserInfo> Infos => Set<UserInfo>();
+        //public DbSet<Genre> Genres => Set<Genre>();
+        //public DbSet<Game> Games => Set<Game>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserConfiguration());    
+            base.OnModelCreating(modelBuilder);
+            //User
+            modelBuilder.Entity<User>().Property(p=> p.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<User>().Property(p=> p.Login).HasMaxLength(15).IsRequired();
+            modelBuilder.Entity<User>().HasOne(u=> u.Info).WithOne(i=> i.User).HasForeignKey<UserInfo>(x=> x.UserId).HasPrincipalKey<User>(u=> u.Id);
+            //modelBuilder.Entity<User>().HasMany(u=> u.Games).WithMany(g=> g.Users);
+            //modelBuilder.Entity<User>().Property(p=> p.Games).IsRequired(false);
+
+            //UserInfo
+            modelBuilder.Entity<UserInfo>().Property(p=> p.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<UserInfo>().Property(p=>p.ImgURL).IsRequired(false);
+            modelBuilder.Entity<UserInfo>().Property(p=> p.Name).IsRequired(false);
+
+            //Game
+            /*modelBuilder.Entity<Game>().Property(g=> g.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Game>().HasMany(g=> g.Genres).WithMany(g=> g.Games);
+
+            //Genre
+            modelBuilder.Entity<Genre>().Property(g=> g.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Genre>().Property(g=> g.Name).IsRequired();*/
+
+
         }
         /*
         public DbSet<Game> Games => Set<Game>();
@@ -50,13 +74,7 @@ namespace PlayAndConnect.Data
                 .HasMany(c => c.Messages)
                 .WithOne(m => m.Chat);
 
-            modelBuilder.Entity<Game>()
-                .HasMany(g => g.Users)
-                .WithMany(l => l.Games);
 
-            modelBuilder.Entity<Game>()
-                .HasMany(g => g.Genres)
-                .WithMany(l => l.Games);
         }*/
     }
 }
