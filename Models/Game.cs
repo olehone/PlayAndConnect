@@ -5,9 +5,10 @@ namespace PlayAndConnect.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Title { get; set; }
         public string Description{get; set;} = " No description ";
-        public virtual ICollection<Genre> Genres { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public ICollection<Genre> Genres { get; set; }
+        public ICollection<User>? Users { get; set; }
+
     }
 }

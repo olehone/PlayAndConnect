@@ -18700,6 +18700,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\Олег\\Desktop\\PlayAndConnect\\Views\\Home\\AddGame.cshtml",
+      "TargetPath": "Views\\Home\\AddGame.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Олег\\Desktop\\PlayAndConnect\\Views\\Home\\Metchs.cshtml",
+      "TargetPath": "Views\\Home\\Metchs.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\Олег\\Desktop\\PlayAndConnect\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"

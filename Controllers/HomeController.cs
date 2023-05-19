@@ -31,6 +31,24 @@ namespace PlayAndConnect.Controllers
             _userDb = userDb;
         }
         [HttpGet]
+        [Authorize]
+        public IActionResult AddGame()
+        {
+            if (TempData.ContainsKey("Error"))
+            {
+                ViewBag.Error = TempData["Error"];
+                TempData.Remove("Error");
+            }
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> AddGame(string title, string description)
+        {
+            return View("Index");
+        }
+        [HttpGet]
         public IActionResult Login()
         {
             if (TempData.ContainsKey("Error"))
@@ -55,7 +73,7 @@ namespace PlayAndConnect.Controllers
                 }
                 else
                 {
-                    TempData["Error"] = "Логін або пароль неправильні"; 
+                    TempData["Error"] = "Логін або пароль неправильні";
                     return RedirectToAction("Login");
                 }
             }
@@ -65,12 +83,12 @@ namespace PlayAndConnect.Controllers
         [HttpGet]
         public IActionResult Signup()
         {
-            if(TempData.ContainsKey("Error"))
+            if (TempData.ContainsKey("Error"))
             {
                 ViewBag.Error = TempData["Error"];
                 TempData.Remove("Error");
             }
-            if(TempData.ContainsKey("username"))
+            if (TempData.ContainsKey("username"))
             {
                 ViewBag.username = TempData["username"];
                 TempData.Remove("username");
@@ -84,7 +102,7 @@ namespace PlayAndConnect.Controllers
             await Logout();
             if (ModelState.IsValid)
             {
-                if (password!=confirm_password)
+                if (password != confirm_password)
                 {
                     TempData["username"] = username;
                     TempData["Error"] = "Паролі не співпадають";
@@ -93,11 +111,17 @@ namespace PlayAndConnect.Controllers
                 User? user = _db.Users.FirstOrDefault<User>(u => u.Login == username);
                 if (user == null)
                 {
-                    User newUser = new User { Login = username, PasswordHash = Hashing.HashPassword(password), ImgURL = null, Name = username };
+                    UserInfo newUserInfo = new UserInfo { Name = username };
+                    User newUser = new User { Login = username, PasswordHash = Hashing.HashPassword(password) };
+                    newUser.Info = newUserInfo;
+                    newUserInfo.User = newUser;
+                    /*ICollection<Game>? userGames = new List<Game> ();
+                    userGames.Add()
+                    newUser.Games = userGames;*/
+                    _db.Infos.Add(newUserInfo);
                     _db.Users.Add(newUser);
                     _db.SaveChanges();
                     await Authenticate(newUser.Login);
-
                     return RedirectToAction("Index");
 
                 }
@@ -143,10 +167,32 @@ namespace PlayAndConnect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Settings(string username, string password)
+        public async Task<IActionResult> Settings(int age = 342347653, string name = "t#45f/**sdf")
         {
-            var users = await _db.Users.ToListAsync<User>();
-            return View("Index");
+            if (_httpContextAccessor != null && _httpContextAccessor.HttpContext != null
+                && _httpContextAccessor.HttpContext.User != null &&
+                _httpContextAccessor.HttpContext.User.Identity != null &&
+                !string.IsNullOrEmpty(_httpContextAccessor.HttpContext.User.Identity.Name))
+            {
+                string? username = _httpContextAccessor.HttpContext.User.Identity.Name;
+                UserInfo? userInfo = await _db.Infos.FirstOrDefaultAsync<UserInfo>(i => i.User.Login == username);
+                if (userInfo != null)
+                {
+                    if (age != 342347653)
+                        userInfo.Age = age;
+                    if (name != "t#45f/**sdf")
+                        userInfo.Name = name;
+                    _db.Infos.Update(userInfo);
+                    await _db.SaveChangesAsync();
+                    return View();
+                }
+                else
+                    return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("IndexForNew");
+            }
         }
         public IActionResult Privacy()
         {

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Create Game</title>
+  <link rel="stylesheet" href="~/wwwroot/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Create Game</h2>
+    <form method="POST">
+        <p class="error">
+        @ViewBag.Error
+        </p>
+        <div class="input-field">
+          <input type="text" name="title" placeholder="Enter game title" class="title" required/>
+        </div>
+        <div class="input-field">
+          <textarea name="description" placeholder="Enter game description" class="description" required></textarea>
+        </div>
+        <div class="input-field">
+          <label for="genres">Select genres (up to 5):</label>
+          <select name="genres[]" id="genres" multiple>
+            @foreach (var genre in ViewBag.Genres)
+            {
+              <option value="@genre">@genre</option>
+            }
+          </select>
+        </div>
+      <div class="input-field button">
+        <input type="submit" name="submit" value="Create Game" />
+      </div>
+    </form>
+  </div>
+  <script src="~/wwwroot/form.js"></script>
+  <script src="~/wwwroot/script.js"></script>
+</body>
+</html>

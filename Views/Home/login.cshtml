@@ -9,6 +9,9 @@
   <div class="container">
     <h2>Login</h2>
     <form method="POST">
+        <p class="error">
+        @ViewBag.Error
+        </p>
       <div class="field username-field">
         <div class="input-field">
           <input type="text" name="username" placeholder="Enter your username" class="username" required/>
@@ -18,9 +21,6 @@
           <p class="error-text">Please enter a valid username</p>                
         </span>
       </div>
-      <p class="error">
-        @ViewBag.Error
-        </p>
       <div class="field create-password">
         <div class="input-field">
           <input type="password" name="password" placeholder="Create password" class="password" required/>
@@ -34,16 +34,6 @@
           </p>
         </span>
       </div>
-      <!--<div class="field confirm-password">
-        <div class="input-field">
-          <input type="password" name="confirm_password" placeholder="Confirm password" class="cPassword" required/>
-          <i class="bx bx-hide show-hide"></i>
-        </div>
-        <span class="error cPassword-error">
-          <i class="bx bx-error-circle error-icon"></i>
-          <p class="error-text">Passwords do not match</p>
-        </span>
-      </div>-->
       <div class="input-field button">
         <input type="submit" name="submit" value="Submit Now" />
       </div>
