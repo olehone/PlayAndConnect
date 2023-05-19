@@ -9,6 +9,9 @@
   <div class="container">
     <h2>Signup</h2>
     <form method="POST">
+        <p class="error">
+        @ViewBag.Error
+        </p>
       <div class="field username-field">
         <div class="input-field">
           <input type="text" name="username" placeholder="Enter your username" class="username" required/>
@@ -16,15 +19,6 @@
         <span class="error username-error">
           <i class="bx bx-error-circle error-icon"></i>
           <p class="error-text">Please enter a valid username</p>                
-        </span>
-      </div>
-      <div class="field email-field">
-        <div class="input-field">
-          <input type="email" name="email" placeholder="Enter your email" class="email" required/>
-        </div>
-        <span class="error email-error">
-          <i class="bx bx-error-circle error-icon"></i>
-          <p class="error-text">Please enter a valid email</p>
         </span>
       </div>
       <div class="field create-password">

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PlayAndConnect.Models;
+using PlayAndConnect.Data.Configurations;
 using Pomelo.EntityFrameworkCore.MySql;
 using System.Reflection.Metadata;
 
@@ -10,19 +11,25 @@ namespace PlayAndConnect.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-              Database.EnsureCreated();
+            //Database.EnsureDeleted();
+            Database.EnsureCreated();
         }
-        public DbSet<User> Users;
-        public DbSet<Game> Games;
-        public DbSet<Chat> Chats;
-        public DbSet<Message> Messages;
-        public DbSet<Like> Likes;
-        public DbSet<Genre> Genres;
+        public DbSet<User> Users => Set<User>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new UserConfiguration());    
+        }
+        /*
+        public DbSet<Game> Games => Set<Game>();
+        public DbSet<Chat> Chats => Set<Chat>();
+        public DbSet<Message> Messages => Set<Message>();
+        public DbSet<Like> Likes => Set<Like>();
+        public DbSet<Genre> Genres => Set<Genre>();
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Chats)
                 .WithMany(c => c.Users); 
@@ -50,6 +57,6 @@ namespace PlayAndConnect.Data
             modelBuilder.Entity<Game>()
                 .HasMany(g => g.Genres)
                 .WithMany(l => l.Games);
-        }
+        }*/
     }
 }

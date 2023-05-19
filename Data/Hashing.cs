@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 namespace PlayAndConnect.Data
 {
-    public static class PasswordHasher
+    public static class Hashing
     {
     public static string HashPassword(string password)
     {

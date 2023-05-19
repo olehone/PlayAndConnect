@@ -56,6 +56,7 @@ namespace PlayAndConnect.Data.Interfaces
             User? user = await _db.Users.FindAsync(id);
             return user;
         }
+        /*
         public ICollection<Chat> GetChats(User user)
         {
             return user.Chats;
@@ -85,10 +86,10 @@ namespace PlayAndConnect.Data.Interfaces
             User? user = await GetByName(name);
             if (user == null)
                 return false;
-            else if (user.PasswordHash == PasswordHasher.HashPassword(password))
+            else if (user.PasswordHash == Hashing.HashPassword(password))
                 return true;
             else return false;
         }
-
+*/
     }
 }
