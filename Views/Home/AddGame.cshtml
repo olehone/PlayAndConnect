@@ -1,3 +1,9 @@
+@{
+    var genresList = ViewBag.GenresList as SelectList;
+}
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,15 +24,21 @@
         <div class="input-field">
           <textarea name="description" placeholder="Enter game description" class="description" required></textarea>
         </div>
-        <div class="input-field">
-          <label for="genres">Select genres (up to 5):</label>
-          <select name="genres[]" id="genres" multiple>
-            @foreach (var genre in ViewBag.Genres)
-            {
-              <option value="@genre">@genre</option>
-            }
-          </select>
-        </div>
+        <select>
+    @foreach (var item in genresList)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+</select>
+@*<label for="genres">Select genres (up to 5):</label>
+@{
+    List<Genre> genresList = (List<Genre>)ViewBag.genresList; // Вказали явний тип
+    SelectList items = new SelectList(genresList, nameof(Genre.Id), nameof(Genre.Name));
+}
+<select asp-for="SelectedGenres" asp-items="items" multiple>
+    <option value="">Choose genres</option>
+</select>
+*@
       <div class="input-field button">
         <input type="submit" name="submit" value="Create Game" />
       </div>
@@ -36,3 +48,9 @@
   <script src="~/wwwroot/script.js"></script>
 </body>
 </html>
+          @*<select name="number">
+    <option value="">Select a number</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+</select>*@

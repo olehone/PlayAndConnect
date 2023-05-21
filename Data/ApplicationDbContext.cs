@@ -11,13 +11,15 @@ namespace PlayAndConnect.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            //Database.EnsureDeleted();
+            Database.EnsureDeleted();
             Database.EnsureCreated();
+            Database.EnsureCreated();
+
         }
         public DbSet<User> Users => Set<User>();
         public DbSet<UserInfo> Infos => Set<UserInfo>();
-        //public DbSet<Genre> Genres => Set<Genre>();
-        //public DbSet<Game> Games => Set<Game>();
+        public DbSet<Genre> Genres => Set<Genre>();
+        public DbSet<Game> Games => Set<Game>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -25,7 +27,7 @@ namespace PlayAndConnect.Data
             modelBuilder.Entity<User>().Property(p=> p.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<User>().Property(p=> p.Login).HasMaxLength(15).IsRequired();
             modelBuilder.Entity<User>().HasOne(u=> u.Info).WithOne(i=> i.User).HasForeignKey<UserInfo>(x=> x.UserId).HasPrincipalKey<User>(u=> u.Id);
-            //modelBuilder.Entity<User>().HasMany(u=> u.Games).WithMany(g=> g.Users);
+            modelBuilder.Entity<User>().HasMany(u=> u.Games).WithMany(g=> g.Users);
             //modelBuilder.Entity<User>().Property(p=> p.Games).IsRequired(false);
 
             //UserInfo
@@ -34,13 +36,14 @@ namespace PlayAndConnect.Data
             modelBuilder.Entity<UserInfo>().Property(p=> p.Name).IsRequired(false);
 
             //Game
-            /*modelBuilder.Entity<Game>().Property(g=> g.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<Game>().HasMany(g=> g.Genres).WithMany(g=> g.Games);
+            modelBuilder.Entity<Game>().Property(g=> g.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Game>().Property(g=> g.Description).IsRequired(false);
+            modelBuilder.Entity<Game>().Property(g=> g.Title).IsRequired(false);
+            //modelBuilder.Entity<Game>().HasMany(g=> g.Genres).WithMany(g=> g.Games);
 
             //Genre
             modelBuilder.Entity<Genre>().Property(g=> g.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<Genre>().Property(g=> g.Name).IsRequired();*/
-
+            modelBuilder.Entity<Genre>().Property(g=> g.Name).IsRequired();
 
         }
         /*

@@ -7,7 +7,7 @@ namespace PlayAndConnect.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description{get; set;} = " No description ";
-        public ICollection<Genre> Genres { get; set; }
+        public ICollection<Genre>? Genres { get; set; }
         public ICollection<User>? Users { get; set; }
 
     }

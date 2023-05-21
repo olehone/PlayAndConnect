@@ -18,7 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
             .LogTo(Console.WriteLine, LogLevel.Information) //це
         .EnableSensitiveDataLogging()                       //потім 
         .EnableDetailedErrors()                             //видалити
-        );
+        ,ServiceLifetime.Singleton);                        //це може викликати проблеми з багатопотоковістю
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => {
