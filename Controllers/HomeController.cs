@@ -189,7 +189,7 @@ namespace PlayAndConnect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Settings(int age = 342347653, string name = "t#45f/**sdf")
+        public async Task<IActionResult> Settings(string name, int selectGame, int age = 788654562)
         {
             if (_httpContextAccessor != null && _httpContextAccessor.HttpContext != null
                 && _httpContextAccessor.HttpContext.User != null &&
@@ -197,36 +197,58 @@ namespace PlayAndConnect.Controllers
                 !string.IsNullOrEmpty(_httpContextAccessor.HttpContext.User.Identity.Name))
             {
                 string? username = _httpContextAccessor.HttpContext.User.Identity.Name;
-                UserInfo? userInfo = await _db.Infos.FirstOrDefaultAsync<UserInfo>(i => i.User.Login == username);
-                if (userInfo != null)
+                User? user = await _db.Users.FirstOrDefaultAsync<User>(u => u.Login == username);
+                UserInfo? userInfo = null;
+                if (user != null)
+                    userInfo = user.Info;
+                Game? game = await _db.Games.FirstOrDefaultAsync<Game>(g => g.Id == selectGame);
+                if (user != null && game != null && age != 788654562 && name != null)
                 {
-                    if (age != 342347653)
+                    if (userInfo != null)
+                    {
                         userInfo.Age = age;
-                    if (name != "t#45f/**sdf")
                         userInfo.Name = name;
-                    _db.Infos.Update(userInfo);
-                    await _db.SaveChangesAsync();
-                    return View();
+                        ICollection<Game>? games = user.Games;
+                        if (games == null)
+                        {
+                            games = new List<Game>();
+                            user.Games = games;
+                        }
+                        games.Add(game); // Додати гру до списку ігор
+                        _db.Infos.Update(userInfo);
+                        _db.Users.Update(user);
+                        await _db.SaveChangesAsync();
+                        return View();
+                    }
+                    else
+                    {
+                        UserInfo newUserInfo = new();
+                        newUserInfo.Age = age;
+                        newUserInfo.Name = name;
+                        ICollection<Game>? games = user.Games;
+                        if (games == null)
+                        {
+                            games = new List<Game>();
+                            user.Games = games;
+                        }
+                        games.Add(game); // Додати гру до списку ігор
+                        User? addingUser = await _db.Users.FirstOrDefaultAsync<User>(u => u.Login == username);
+                        if (addingUser != null)
+                        {
+                            newUserInfo.User = addingUser;
+                            newUserInfo.User.Info = newUserInfo;
+                        }
+                        _db.Users.Update(user);
+                        await _db.SaveChangesAsync();
+                        return RedirectToAction("Index");
+                    }
                 }
                 else
-                {
-                    UserInfo newUserInfo = new();
-                    newUserInfo.Age = age;
-                    newUserInfo.Name = name;
-                    User? addingUser = await _db.Users.FirstOrDefaultAsync<User>(u => u.Login == username);
-                    if (addingUser != null)
-                    {
-                        newUserInfo.User = addingUser;
-                        newUserInfo.User.Info = newUserInfo;
-                    }
-
-                    await _db.SaveChangesAsync();
                     return RedirectToAction("Index");
-                }
             }
             else
             {
-                return View("IndexForNew");
+                return RedirectToAction("Index");
             }
         }
         public IActionResult Privacy()
@@ -247,13 +269,7 @@ namespace PlayAndConnect.Controllers
         public IActionResult GetGameOptions(string gameName)
         {
             List<Game> games = _db.Games.Where(game => game.Title.ToLower().Contains(gameName.ToLower())).ToList();
-            foreach(Game g in games)
-            {
-                g.Genre = null;
-                g.Users = null;
-                g.Description = null;
-            }
-            return Json(games);//Convert.SerializeObject(games);
+            return Json(games.Select(g => new { Id = g.Id, Title = g.Title }));
         }
 
         private async Task Authenticate(string userName)

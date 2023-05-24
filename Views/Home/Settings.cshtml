@@ -9,114 +9,19 @@
   <div class="container">
     <h2>Account info</h2>
     <form method="POST">
-        <p class="error">
-        @ViewBag.Error
-        </p>
-        <div class="input-field">
-          <input type="int" name="age" placeholder="Enter your age" class="age" required/>
-        </div>
-        <div class="input-field">
-          <input type="text" name="name" placeholder="Enter your name" class="name" required/>
-        </div>
-        <div>
-        <input type="text" id="gameNameInput" oninput="getGameOptions()">
-<select id="gameOptions"></select>
-</div>
-      <div class="input-field button">
-        <input type="submit" name="submit" value="Submit Now" />
-      </div>
-    </form>
-  </div>
-  <script src="~/wwwroot/form.js"></script>
-  <script src="~/js/selectGames.js"></script>
-</body>
-</html>
-@*<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Settings</title>
-  <link rel="stylesheet" href="~/wwwroot/css/style.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    function getGameOptions() {
-      var gameName = $('#gameNameInput').val();
-
-      $.ajax({
-        url: '/Home/GetGameOptions',
-        type: 'POST',
-        data: { gameName: gameName },
-        success: function(result) {
-          populateGameOptions(result);
-        },
-        error: function(xhr, status, error) {
-          console.log('Error:', error);
-        }
-      });
-    }
-
-    function populateGameOptions(options) {
-      var gameOptionsSelect = $('#gameOptions');
-      gameOptionsSelect.empty();
-
-      // Додавання варіантів у випадаючий список
-      for (var i = 0; i < options.length; i++) {
-        var option = options[i];
-        var optionElement = $('<option>').text(option.Title).val(option.Id);
-        gameOptionsSelect.append(optionElement);
-      }
-    }
-  </script>
-</head>
-<body>
-  <div class="container">
-    <h2>Account info</h2>
-    <form method="POST">
       <p class="error">
         @ViewBag.Error
       </p>
       <div class="input-field">
-        <input type="number" name="age" placeholder="Enter your age" class="age" required/>
+        <input type="number" name="age" placeholder="Enter your age" class="age" required min = 5 max = 100/>
       </div>
       <div class="input-field">
         <input type="text" name="name" placeholder="Enter your name" class="name" required/>
       </div>
       <div>
         <input type="text" id="gameNameInput" oninput="getGameOptions()">
-        <select id="gameOptions" name="gameId"></select>
+        <select id="gameOptions" size="5" name = "selectGame"></select>
       </div>
-      <div class="input-field button">
-        <input type="submit" name="submit" value="Submit Now" />
-      </div>
-    </form>
-  </div>
-</body>
-</html>
-
-@*<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Settings</title>
-  <link rel="stylesheet" href="~/wwwroot/css/style.css">
-</head>
-<body>
-  <div class="container">
-    <h2>Account info</h2>
-    <form method="POST">
-        <p class="error">
-        @ViewBag.Error
-        </p>
-        <div class="input-field">
-          <input type="int" name="age" placeholder="Enter your age" class="age" required/>
-        </div>
-        <div class="input-field">
-          <input type="text" name="name" placeholder="Enter your name" class="name" required/>
-        </div>
-        <div>
-        <input type="text" id="gameNameInput" oninput="getGameOptions()">
-<select id="gameOptions"></select>
-</div>
       <div class="input-field button">
         <input type="submit" name="submit" value="Submit Now" />
       </div>
@@ -125,4 +30,4 @@
   <script src="~/wwwroot/form.js"></script>
   <script src="~/js/selectGames.js"></script>
 </body>
-</html>*@
+</html>
