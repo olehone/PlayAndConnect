@@ -35,3 +35,4 @@ C:\Users\Олег\Desktop\PlayAndConnect\bin\Debug\net7.0\Microsoft.EntityFramew
 C:\Users\Олег\Desktop\PlayAndConnect\bin\Debug\net7.0\MySqlConnector.dll
 C:\Users\Олег\Desktop\PlayAndConnect\bin\Debug\net7.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\Олег\Desktop\PlayAndConnect\obj\Debug\net7.0\PlayAndConnect.csproj.CopyComplete
+C:\Users\Олег\Desktop\PlayAndConnect\bin\Debug\net7.0\Newtonsoft.Json.dll

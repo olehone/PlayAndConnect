@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AVV7kE4cGI9jwQcmjIAClPNjRc9oGviipWphIXhYqro=",
+  "Hash": "HFmBRzEdVQDzjHYzhgu4hj4kyosDhliPkX9pkIo/1Ss=",
   "Source": "PlayAndConnect",
   "BasePath": "_content/PlayAndConnect",
   "Mode": "Default",
@@ -168,6 +168,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\script.js"
+    },
+    {
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\js\\selectGames.js",
+      "SourceId": "PlayAndConnect",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
+      "BasePath": "_content/PlayAndConnect",
+      "RelativePath": "js/selectGames.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\selectGames.js"
+    },
+    {
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\js\\selectGamesNew.js",
+      "SourceId": "PlayAndConnect",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
+      "BasePath": "_content/PlayAndConnect",
+      "RelativePath": "js/selectGamesNew.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\selectGamesNew.js"
     },
     {
       "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\js\\site.js",

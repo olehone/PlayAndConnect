@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "y28UtOJXFOGORuJ3a7edU3IqS079kKtZdf+t1q5nFGNsQXlSwOfSwQC6BuuchY+Y39ucHZzvH5JHf/r8F7FUXA==",
+  "dgSpecHash": "KMqWNBrDLk1/0+pblE+HgpJKpWKhcCjcrRqsdLqOjLeXi9seKghoite6ZPlx+w8T/6/d6uI9DlxECov8j1eL8Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\PlayAndConnect.csproj",
   "expectedPackageFiles": [
@@ -18,6 +18,7 @@
     "C:\\Users\\Олег\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
     "C:\\Users\\Олег\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\Олег\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512",
+    "C:\\Users\\Олег\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Олег\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\7.0.0\\pomelo.entityframeworkcore.mysql.7.0.0.nupkg.sha512"
   ],
   "logs": []

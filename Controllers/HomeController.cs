@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace PlayAndConnect.Controllers
 {
@@ -32,53 +33,7 @@ namespace PlayAndConnect.Controllers
             _httpContextAccessor = httpContextAccessor;
             _userDb = userDb;
         }
-        [HttpGet]
-        [Authorize]
-        public IActionResult AddGenres()
-        {
-            string[] genres = {
-                    "ACTION",
-                    "ADVENTURE",
-                    "ROLE_PLAYING_GAME",
-                    "STRATEGY",
-                    "SHOOTER",
-                    "SPORTS",
-                    "SIMULATION",
-                    "FIGHTING",
-                    "PUZZLE",
-                    "PLATFORMER",
-                    "RACING",
-                    "MMORPG",
-                    "SURVIVAL",
-                    "HORROR",
-                    "STEALTH",
-                    "OPEN_WORLD",
-                    "SANDBOX",
-                    "EDUCATIONAL",
-                    "MUSIC_RHYTHM",
-                    "VISUAL_NOVEL"
-                };
 
-            List<Genre> genreList = new List<Genre>();
-
-            foreach (string genreName in genres)
-            {
-                Genre genre = new Genre
-                {
-                    Name = genreName,
-                    Description = GetGenreDescription(genreName),
-                    Games = new List<Game>()
-                };
-
-                genreList.Add(genre);
-            }
-            foreach(Genre genre in genreList)
-            {
-                _db.Genres.Add(genre);
-            }
-            _db.SaveChanges();
-            return RedirectToAction("AddGame");
-        }
 
         [HttpGet]
         [Authorize]
@@ -89,8 +44,8 @@ namespace PlayAndConnect.Controllers
                 ViewBag.Error = TempData["Error"];
                 TempData.Remove("Error");
             }
-            Genre? cheak = _db.Genres.FirstOrDefault<Genre>(g=> g.Id == 3);
-            if(cheak== null)
+            Genre? cheak = _db.Genres.FirstOrDefault<Genre>(g => g.Id == 3);
+            if (cheak == null)
             {
                 return RedirectToAction("AddGenres");
             }
@@ -101,40 +56,19 @@ namespace PlayAndConnect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> AddGame(string title = "default", string description = "default")
+        public async Task<IActionResult> AddGame(int selectGenre, string title = "default", string description = "default")
         {
             Game newGame = new();
-            List<Genre> genres = new();
-            genres.Add(_db.Genres.FirstOrDefault<Genre>(g=> g.Id == 4));
+            Genre? genre = _db.Genres.FirstOrDefault<Genre>(g => g.Id == selectGenre);
             newGame.Description = description;
             newGame.Title = title;
-            newGame.Genres = genres;
-            string? username = null;
-            User? user = null;
-            if (_httpContextAccessor?.HttpContext?.User?.Identity != null)
-            {
-                username = _httpContextAccessor.HttpContext.User.Identity.Name;
-            }
-            newGame.Description = "test desck";
-            if (!string.IsNullOrEmpty(username))
-            {
-                user = await _db.Users.FirstOrDefaultAsync<User>(u => u.Login == username);
-
-                if (user != null)
-                {
-                    if (user.Games != null)
-                        user.Games.Add(newGame);
-                    else
-                        user.Games = new List<Game>() { newGame };
-                }
-
-            }
-            newGame.Description = "helllo";
+            if (genre != null)
+                newGame.Genre = genre;
+            else
+                newGame.Genre = _db.Genres.FirstOrDefault<Genre>(g => g.Id == 3);
             _db.Games.Add(newGame);
-            if (user != null)
-                _db.Users.Update(user);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AddGame");
         }
         [HttpGet]
         public IActionResult Login()
@@ -309,6 +243,19 @@ namespace PlayAndConnect.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [HttpPost]
+        public IActionResult LHssdhsaoidhgaoeghaiwodiejg(string gameName)
+        {
+            List<Game> games = _db.Games.Where(game => game.Title.ToLower().Contains(gameName.ToLower())).ToList();
+            foreach(Game g in games)
+            {
+                g.Genre = null;
+                g.Users = null;
+                g.Description = null;
+            }
+            return Json(games);//Convert.SerializeObject(games);
+        }
+
         private async Task Authenticate(string userName)
         {
             var claims = new List<Claim>
@@ -317,6 +264,53 @@ namespace PlayAndConnect.Controllers
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
+        [HttpGet]
+        [Authorize]
+        public IActionResult AddGenres()
+        {
+            string[] genres = {
+                    "ACTION",
+                    "ADVENTURE",
+                    "ROLE_PLAYING_GAME",
+                    "STRATEGY",
+                    "SHOOTER",
+                    "SPORTS",
+                    "SIMULATION",
+                    "FIGHTING",
+                    "PUZZLE",
+                    "PLATFORMER",
+                    "RACING",
+                    "MMORPG",
+                    "SURVIVAL",
+                    "HORROR",
+                    "STEALTH",
+                    "OPEN_WORLD",
+                    "SANDBOX",
+                    "EDUCATIONAL",
+                    "MUSIC_RHYTHM",
+                    "VISUAL_NOVEL"
+                };
+
+            List<Genre> genreList = new List<Genre>();
+
+            foreach (string genreName in genres)
+            {
+                Genre genre = new Genre
+                {
+                    Name = genreName,
+                    Description = GetGenreDescription(genreName),
+                    Games = new List<Game>()
+                };
+
+                genreList.Add(genre);
+            }
+            foreach (Genre genre in genreList)
+            {
+                _db.Genres.Add(genre);
+            }
+            _db.SaveChanges();
+            return RedirectToAction("AddGame");
         }
         // Метод для отримання опису жанру
         private string GetGenreDescription(string genreName)

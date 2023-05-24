@@ -33,6 +33,14 @@
       "PackagePath": "staticwebassets\\js\\script.js"
     },
     {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\js\\selectGames.js",
+      "PackagePath": "staticwebassets\\js\\selectGames.js"
+    },
+    {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\js\\selectGamesNew.js",
+      "PackagePath": "staticwebassets\\js\\selectGamesNew.js"
+    },
+    {
       "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

@@ -11,8 +11,7 @@ namespace PlayAndConnect.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
 
         }
@@ -20,6 +19,8 @@ namespace PlayAndConnect.Data
         public DbSet<UserInfo> Infos => Set<UserInfo>();
         public DbSet<Genre> Genres => Set<Genre>();
         public DbSet<Game> Games => Set<Game>();
+        //public DbSet<Chat> Chats => Set<Chat>();
+        //public DbSet<Message> Messages => Set<Message>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -28,7 +29,7 @@ namespace PlayAndConnect.Data
             modelBuilder.Entity<User>().Property(p=> p.Login).HasMaxLength(15).IsRequired();
             modelBuilder.Entity<User>().HasOne(u=> u.Info).WithOne(i=> i.User).HasForeignKey<UserInfo>(x=> x.UserId).HasPrincipalKey<User>(u=> u.Id);
             modelBuilder.Entity<User>().HasMany(u=> u.Games).WithMany(g=> g.Users);
-            //modelBuilder.Entity<User>().Property(p=> p.Games).IsRequired(false);
+            //modelBuilder.Entity<User>().HasMany(u=> u.Char);
 
             //UserInfo
             modelBuilder.Entity<UserInfo>().Property(p=> p.Id).ValueGeneratedOnAdd();
@@ -39,7 +40,7 @@ namespace PlayAndConnect.Data
             modelBuilder.Entity<Game>().Property(g=> g.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Game>().Property(g=> g.Description).IsRequired(false);
             modelBuilder.Entity<Game>().Property(g=> g.Title).IsRequired(false);
-            //modelBuilder.Entity<Game>().HasMany(g=> g.Genres).WithMany(g=> g.Games);
+            modelBuilder.Entity<Game>().HasOne(g=> g.Genre).WithMany(g=> g.Games);
 
             //Genre
             modelBuilder.Entity<Genre>().Property(g=> g.Id).ValueGeneratedOnAdd();
@@ -47,11 +48,7 @@ namespace PlayAndConnect.Data
 
         }
         /*
-        public DbSet<Game> Games => Set<Game>();
-        public DbSet<Chat> Chats => Set<Chat>();
-        public DbSet<Message> Messages => Set<Message>();
         public DbSet<Like> Likes => Set<Like>();
-        public DbSet<Genre> Genres => Set<Genre>();
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

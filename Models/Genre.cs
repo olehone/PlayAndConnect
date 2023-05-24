@@ -32,5 +32,4 @@ namespace PlayAndConnect.Models
         public string Description{get; set;}
         public virtual ICollection<Game> Games { get; set; }
     }
-
 }

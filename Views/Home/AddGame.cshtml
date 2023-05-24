@@ -24,21 +24,34 @@
         <div class="input-field">
           <textarea name="description" placeholder="Enter game description" class="description" required></textarea>
         </div>
-        <select>
+        <select name = "selectGenre">
+          <option value="1">Action</option>
+          <option value="2">Aventure</option>
+          <option value="3">RPG</option>
+          <option value="4">Strategy</option>
+          <option value="5">Shooter</option>
+          <option value="6">Sports</option>
+          <option value="7">Simulation</option>
+          <option value="8">Fighting</option>
+          <option value="9">Puzzle</option>
+          <option value="10">Platformer</option>
+          <option value="11">Racing</option>
+          <option value="12">MMORPG</option>
+          <option value="13">Survival</option>
+          <option value="14">Horror</option>
+          <option value="15">Stealth</option>
+          <option value="16">Open World</option>
+          <option value="17">Sandbox</option>
+          <option value="18">Educational</option>
+          <option value="19">Music Rhythm</option>
+          <option value="20">Visual Novel</option>
+        </select>
+        @*
     @foreach (var item in genresList)
     {
         <option value="@item.Value">@item.Text</option>
-    }
-</select>
-@*<label for="genres">Select genres (up to 5):</label>
-@{
-    List<Genre> genresList = (List<Genre>)ViewBag.genresList; // Вказали явний тип
-    SelectList items = new SelectList(genresList, nameof(Genre.Id), nameof(Genre.Name));
-}
-<select asp-for="SelectedGenres" asp-items="items" multiple>
-    <option value="">Choose genres</option>
-</select>
-*@
+    }*@
+
       <div class="input-field button">
         <input type="submit" name="submit" value="Create Game" />
       </div>
@@ -54,3 +67,12 @@
     <option value="2">Two</option>
     <option value="3">Three</option>
 </select>*@
+@*<label for="genres">Select genres (up to 5):</label>
+@{
+    List<Genre> genresList = (List<Genre>)ViewBag.genresList; // Вказали явний тип
+    SelectList items = new SelectList(genresList, nameof(Genre.Id), nameof(Genre.Name));
+}
+<select asp-for="SelectedGenres" asp-items="items" multiple>
+    <option value="">Choose genres</option>
+</select>
+*@
