@@ -244,7 +244,7 @@ namespace PlayAndConnect.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         [HttpPost]
-        public IActionResult LHssdhsaoidhgaoeghaiwodiejg(string gameName)
+        public IActionResult GetGameOptions(string gameName)
         {
             List<Game> games = _db.Games.Where(game => game.Title.ToLower().Contains(gameName.ToLower())).ToList();
             foreach(Game g in games)

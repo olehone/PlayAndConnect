@@ -2,7 +2,7 @@ function getGameOptions() {
     var gameName = $('#gameNameInput').val();
     
     $.ajax({
-      url: '/Home/LHssdhsaoidhgaoeghaiwodiejg',
+      url: '/Home/GetGameOptions',
       type: 'POST',
       data: { gameName: gameName },
       success: function(result) {
