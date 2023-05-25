@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    Ur metch: @ViewBag.username
+    And login: @ViewBag.Login
+    <div>
+      <form action="/Home/Metch" method="post">
+    <input type="hidden" name="like" value="true">
+    <button type="submit">Подобається</button>
+  </form>
+</div>
+<div>
+  <form action="/Home/Metch" method="post">
+    <input type="hidden" name="like" value="false">
+    <button type="submit">Не подобається</button>
+  </form>
+</div>
+</body>
+</html>

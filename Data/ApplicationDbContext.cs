@@ -11,7 +11,7 @@ namespace PlayAndConnect.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            //Database.EnsureDeleted();
+            Database.EnsureDeleted();
             Database.EnsureCreated();
 
         }
@@ -19,6 +19,8 @@ namespace PlayAndConnect.Data
         public DbSet<UserInfo> Infos => Set<UserInfo>();
         public DbSet<Genre> Genres => Set<Genre>();
         public DbSet<Game> Games => Set<Game>();
+        public DbSet<Like> Likes => Set<Like>();
+        
         //public DbSet<Chat> Chats => Set<Chat>();
         //public DbSet<Message> Messages => Set<Message>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,6 +31,9 @@ namespace PlayAndConnect.Data
             modelBuilder.Entity<User>().Property(p=> p.Login).HasMaxLength(15).IsRequired();
             modelBuilder.Entity<User>().HasOne(u=> u.Info).WithOne(i=> i.User).HasForeignKey<UserInfo>(x=> x.UserId).HasPrincipalKey<User>(u=> u.Id);
             modelBuilder.Entity<User>().HasMany(u=> u.Games).WithMany(g=> g.Users);
+            //modelBuilder.Entity<User>().HasMany(u=>u.Likes).WithOne(l=> l.User1);
+            //modelBuilder.Entity<User>().HasMany(u=>u.Likes).WithOne(l=> l.User2);
+
             //modelBuilder.Entity<User>().HasMany(u=> u.Char);
 
             //UserInfo
@@ -45,6 +50,9 @@ namespace PlayAndConnect.Data
             //Genre
             modelBuilder.Entity<Genre>().Property(g=> g.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Genre>().Property(g=> g.Name).IsRequired();
+
+            //Like
+            modelBuilder.Entity<Like>().Property(l=> l.Id).ValueGeneratedOnAdd();
 
         }
         /*

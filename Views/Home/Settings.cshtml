@@ -13,8 +13,12 @@
         @ViewBag.Error
       </p>
       <div class="input-field">
-        <input type="number" name="age" placeholder="Enter your age" class="age" required min = 5 max = 100/>
+        <input type="number" name="age" placeholder="Enter your age" class="age" required max = "100", min = "7"/>
       </div>
+      <div>
+  <input type="checkbox" name="ageCheck" value="true" id = "myCheckBox">
+  <label for="myCheckbox">Чи важливий вік іншої людини?</label>
+</div>
       <div class="input-field">
         <input type="text" name="name" placeholder="Enter your name" class="name" required/>
       </div>

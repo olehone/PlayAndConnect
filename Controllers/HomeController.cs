@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Runtime.CompilerServices;
+using System.Reflection.Metadata;
+using System.Text.RegularExpressions;
 using System.Security.AccessControl;
 using System.Data;
 using System.Linq;
@@ -107,7 +109,7 @@ namespace PlayAndConnect.Controllers
         {
             if (TempData.ContainsKey("Error"))
             {
-                ViewBag.Error = TempData["Error"];
+                ViewBag.Erro = TempData["Error"];
                 TempData.Remove("Error");
             }
             if (TempData.ContainsKey("username"))
@@ -182,6 +184,91 @@ namespace PlayAndConnect.Controllers
         }
         [HttpGet]
         [Authorize]
+        public IActionResult Metch()
+        {
+            User? userForView = GetUserForMetch();
+            if (userForView != null)
+            {
+                ViewBag.Username = userForView.Info.Name;
+                ViewBag.Login = userForView.Login;
+                if (TempData.ContainsKey("LoginMetch"))
+                {
+                    string Login = userForView.Login;
+                    TempData["LoginMetch"] = userForView;
+                }
+                return View();
+            }
+            else
+                return RedirectToAction("Index");
+        }
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        [HttpPost]
+        public IActionResult Metch(bool like)
+        {
+            if (TempData.ContainsKey("LoginMetch"))
+            {
+                //string? login = (string)TempData["LoginMetch"];
+                User? getUserForMetch = (User?)TempData["LoginMetch"];
+                TempData.Remove("LoginMetch");
+                if (getUserForMetch == null)
+                    return RedirectToAction("Index");
+                string? currentUsername;
+                if (!(GetUsernameFromCookie(out currentUsername)))
+                {
+                    TempData["Error"] = "Не вийшло дістати користувача з кукі";
+                    return RedirectToAction("Index");
+                }
+                User? currentUser = _db.Users.FirstOrDefault<User>(u => u.Login == currentUsername);
+                if (currentUser == null)
+                    return RedirectToAction("Index");
+                if (!UpDateLike(getUserForMetch, currentUser, like))
+                     {
+                    TempData["Error"] = "Не вийшло оновити лайк";
+                    return RedirectToAction("Index");
+                }
+
+                return RedirectToAction("Metch");
+            }
+            else
+                return RedirectToAction("Metch");
+        }
+        [NonAction]
+        private bool UpDateLike(User user1, User user2, bool firstLikeSecond)
+        {
+            bool isGoodResult = false;
+            Like? like = user1.Likes.FirstOrDefault<Like>(l => l.User1Id == user1.Id && l.User2Id == user2.Id);
+            if (like != null)
+            {
+                like.User1LikesUser2 = firstLikeSecond;
+                _db.Likes.Update(like);
+                isGoodResult = true;
+            }
+            else
+            {
+                like = user1.Likes.FirstOrDefault<Like>(l => l.User2Id == user1.Id && l.User1Id == user2.Id);
+
+                if (like != null)
+                {
+                    like.User2LikesUser1 = firstLikeSecond;
+                    _db.Likes.Update(like);
+                    isGoodResult = true;
+                }
+                else
+                {
+                    like = new();
+                    like.User1Id = user1.Id;
+                    like.User2Id = user2.Id;
+                    like.User1LikesUser2 = firstLikeSecond;
+                    _db.Likes.Add(like);
+                    isGoodResult = true;
+                }
+            }
+            _db.SaveChanges();
+            return isGoodResult;
+        }
+        [HttpGet]
+        [Authorize]
         public IActionResult Settings()
         {
             return View();
@@ -189,25 +276,23 @@ namespace PlayAndConnect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Settings(string name, int selectGame, int age = 788654562)
+        public async Task<IActionResult> Settings(string name, int selectGame, int age, bool ageCheck)
         {
-            if (_httpContextAccessor != null && _httpContextAccessor.HttpContext != null
-                && _httpContextAccessor.HttpContext.User != null &&
-                _httpContextAccessor.HttpContext.User.Identity != null &&
-                !string.IsNullOrEmpty(_httpContextAccessor.HttpContext.User.Identity.Name))
+            string? username;
+            if (GetUsernameFromCookie(out username))
             {
-                string? username = _httpContextAccessor.HttpContext.User.Identity.Name;
                 User? user = await _db.Users.FirstOrDefaultAsync<User>(u => u.Login == username);
                 UserInfo? userInfo = null;
                 if (user != null)
                     userInfo = user.Info;
                 Game? game = await _db.Games.FirstOrDefaultAsync<Game>(g => g.Id == selectGame);
-                if (user != null && game != null && age != 788654562 && name != null)
+                if (user != null && game != null && age > 7 && age < 100 && name != null)
                 {
                     if (userInfo != null)
                     {
                         userInfo.Age = age;
                         userInfo.Name = name;
+                        userInfo.ageIsMatter = ageCheck;
                         ICollection<Game>? games = user.Games;
                         if (games == null)
                         {
@@ -218,13 +303,14 @@ namespace PlayAndConnect.Controllers
                         _db.Infos.Update(userInfo);
                         _db.Users.Update(user);
                         await _db.SaveChangesAsync();
-                        return View();
+                        return RedirectToAction("Index");
                     }
                     else
                     {
                         UserInfo newUserInfo = new();
                         newUserInfo.Age = age;
                         newUserInfo.Name = name;
+                        newUserInfo.ageIsMatter = true;
                         ICollection<Game>? games = user.Games;
                         if (games == null)
                         {
@@ -251,6 +337,116 @@ namespace PlayAndConnect.Controllers
                 return RedirectToAction("Index");
             }
         }
+        [NonAction]
+        private User? GetUserForMetch()
+        {
+            string? username;
+            if (GetUsernameFromCookie(out username))
+            {
+                User? user = _db.Users.FirstOrDefault<User>(u => u.Login == username);
+                if (user != null)
+                {
+                    UserInfo? info = user.Info;
+                    IEnumerable<Like>? likes = user.Likes;
+                    if (likes != null)
+                    {
+                        int? userId = likes.FirstOrDefault(l => l.User1Id == user.Id && !l.User1LikesUser2 && l.User2LikesUser1)?.User2Id;
+                        if (userId == null)
+                        {
+                            userId = likes.FirstOrDefault(l => l.User2Id == user.Id && !l.User2LikesUser1 && l.User1LikesUser2)?.User2Id;
+                        }
+                        if (userId != null)
+                        {
+                            return _db.Users.FirstOrDefault<User>(u => u.Id == userId);
+                        }
+                    }
+                    ICollection<Game> games = user.Games;
+                    if (games != null)
+                    {
+                        ICollection<Genre> genres = new List<Genre>();
+                        foreach (Game g in games)
+                        {
+                            if (!genres.Contains(g.Genre))
+                                genres.Add(g.Genre);
+                        }
+                        ICollection<Game> gamesFromGenre = new List<Game>();
+                        ICollection<Game> gamesMatch = new List<Game>();
+                        ICollection<User> usersMatch = new List<User>();
+                        ICollection<User>? usersFromGames = new List<User>();
+                        foreach (Genre g in genres)
+                        {
+                            gamesFromGenre = g.Games;
+                            foreach (Game gem in gamesFromGenre)
+                            {
+                                if (!gamesMatch.Contains(gem))
+                                {
+                                    gamesMatch.Add(gem);
+                                }
+                            }
+                        }
+                        foreach (Game ge in gamesMatch)
+                        {
+                            usersFromGames = ge.Users;
+                            if (usersFromGames != null)
+                            {
+                                foreach (User u in usersFromGames)
+                                {
+                                    if (!usersMatch.Contains(u))
+                                    {
+                                        usersMatch.Add(u);
+                                    }
+                                }
+                                usersMatch.Remove(user);
+                            }
+                        }
+                        if (usersMatch == null)
+                            return null;
+                        else
+                        {
+                            foreach (User returnUser in usersMatch)
+                            {
+                                if (isUserNonInUnlike(user, returnUser))
+                                {
+                                    return returnUser;
+                                }
+                            }
+                            return null;
+                        }
+
+                    }
+                    else
+                    {
+                        TempData["Error"] = "No games";
+                        RedirectToAction("Settings");
+                        return null;
+                    }
+                }
+                else
+                    return null;
+            }
+            else
+                return null;
+        }
+        [NonAction]
+        private bool isUserNonInUnlike(User userWhoSearches, User userWhoChecked)
+        {
+            List<Like> chekedLikes = (List<Like>)userWhoChecked.Likes;
+            if (chekedLikes == null)
+                return true;
+            int checkId = userWhoChecked.Id;
+            foreach (Like checkLike in chekedLikes)
+            {
+                if (checkLike.User1Id == checkId || checkLike.User2Id == checkId)
+                {
+                    if (!checkLike.User1LikesUser2 && !checkLike.User2LikesUser1)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+
+        }
         public IActionResult Privacy()
         {
             return View();
@@ -271,7 +467,6 @@ namespace PlayAndConnect.Controllers
             List<Game> games = _db.Games.Where(game => game.Title.ToLower().Contains(gameName.ToLower())).ToList();
             return Json(games.Select(g => new { Id = g.Id, Title = g.Title }));
         }
-
         private async Task Authenticate(string userName)
         {
             var claims = new List<Claim>
@@ -327,6 +522,23 @@ namespace PlayAndConnect.Controllers
             }
             _db.SaveChanges();
             return RedirectToAction("AddGame");
+        }
+        [NonAction]
+        private bool GetUsernameFromCookie(out string? username)
+        {
+            if (_httpContextAccessor != null && _httpContextAccessor.HttpContext != null
+                && _httpContextAccessor.HttpContext.User != null &&
+                _httpContextAccessor.HttpContext.User.Identity != null &&
+                !string.IsNullOrEmpty(_httpContextAccessor.HttpContext.User.Identity.Name))
+            {
+                username = _httpContextAccessor.HttpContext.User.Identity.Name;
+                return true;
+            }
+            else
+            {
+                username = null;
+                return false;
+            }
         }
         // Метод для отримання опису жанру
         private string GetGenreDescription(string genreName)

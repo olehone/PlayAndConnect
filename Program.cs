@@ -18,15 +18,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
             .LogTo(Console.WriteLine, LogLevel.Information) //це
         .EnableSensitiveDataLogging()                       //потім 
         .EnableDetailedErrors()                             //видалити
-        ,ServiceLifetime.Singleton);                        //це може викликати проблеми з багатопотоковістю
+        , ServiceLifetime.Singleton);                        //це може викликати проблеми з багатопотоковістю
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options => {
-    options.LoginPath = "/Home/Login";
-    options.Cookie.Name = "Login";
-    options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromDays(30);
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Home/Login";
+        options.Cookie.Name = "Login";
+        options.Cookie.HttpOnly = true;
+        options.ExpireTimeSpan = TimeSpan.FromDays(30);
     });
+builder.Services.AddResponseCaching();
 builder.Services.AddAuthorization();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
