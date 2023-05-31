@@ -109,7 +109,7 @@ namespace PlayAndConnect.Controllers
         {
             if (TempData.ContainsKey("Error"))
             {
-                ViewBag.Erro = TempData["Error"];
+                ViewBag.Error = TempData["Error"];
                 TempData.Remove("Error");
             }
             if (TempData.ContainsKey("username"))
@@ -135,14 +135,7 @@ namespace PlayAndConnect.Controllers
                 User? user = _db.Users.FirstOrDefault<User>(u => u.Login == username);
                 if (user == null)
                 {
-                    //UserInfo newUserInfo = new UserInfo { Name = username };
                     User newUser = new User { Login = username, PasswordHash = Hashing.HashPassword(password) };
-                    //newUser.Info = newUserInfo;
-                    //newUserInfo.User = newUser;
-                    /*ICollection<Game>? userGames = new List<Game> ();
-                    userGames.Add()
-                    newUser.Games = userGames;*/
-                    //_db.Infos.Add(newUserInfo);
                     _db.Users.Add(newUser);
                     _db.SaveChanges();
                     await Authenticate(newUser.Login);
@@ -184,34 +177,44 @@ namespace PlayAndConnect.Controllers
         }
         [HttpGet]
         [Authorize]
-        public IActionResult Metch()
+        public async Task<IActionResult> Match()
         {
-            User? userForView = GetUserForMetch();
+            Console.WriteLine("Getting user");
+            User? userForView = await GetUserForMatch();
             if (userForView != null)
             {
                 ViewBag.Username = userForView.Info.Name;
                 ViewBag.Login = userForView.Login;
-                if (TempData.ContainsKey("LoginMetch"))
-                {
-                    string Login = userForView.Login;
-                    TempData["LoginMetch"] = userForView;
-                }
+                ViewBag.Age = userForView.Info.Age;
+                string login = userForView.Login;
+                TempData["LoginMatch"] = login;
                 return View();
             }
             else
+            {
+                TempData["Error"] = "No user in match";
                 return RedirectToAction("Index");
+            }
         }
         [ValidateAntiForgeryToken]
         [Authorize]
         [HttpPost]
-        public IActionResult Metch(bool like)
+        public IActionResult Match(bool like)
         {
-            if (TempData.ContainsKey("LoginMetch"))
+            if (TempData.ContainsKey("LoginMatch"))
             {
-                //string? login = (string)TempData["LoginMetch"];
-                User? getUserForMetch = (User?)TempData["LoginMetch"];
-                TempData.Remove("LoginMetch");
-                if (getUserForMetch == null)
+                string? login = (string)TempData["LoginMatch"];
+                User? getUserFromMatch;
+                if (login != null)
+                {
+                    getUserFromMatch = _db.Users.FirstOrDefault<User>(u => u.Login == login);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+                TempData.Remove("LoginMatch");
+                if (getUserFromMatch == null)
                     return RedirectToAction("Index");
                 string? currentUsername;
                 if (!(GetUsernameFromCookie(out currentUsername)))
@@ -222,50 +225,83 @@ namespace PlayAndConnect.Controllers
                 User? currentUser = _db.Users.FirstOrDefault<User>(u => u.Login == currentUsername);
                 if (currentUser == null)
                     return RedirectToAction("Index");
-                if (!UpDateLike(getUserForMetch, currentUser, like))
-                     {
+                if (!UpDateLike(currentUser, getUserFromMatch, like))
+                {
                     TempData["Error"] = "Не вийшло оновити лайк";
                     return RedirectToAction("Index");
                 }
-
-                return RedirectToAction("Metch");
+                else
+                    return RedirectToAction("Match");
             }
             else
-                return RedirectToAction("Metch");
+            {
+                return RedirectToAction("Match");
+            }
+
         }
         [NonAction]
         private bool UpDateLike(User user1, User user2, bool firstLikeSecond)
         {
-            bool isGoodResult = false;
-            Like? like = user1.Likes.FirstOrDefault<Like>(l => l.User1Id == user1.Id && l.User2Id == user2.Id);
+            Like? like = _db.Likes.FirstOrDefault<Like>(l => l.User1Id == user1.Id && l.User2Id == user2.Id);
             if (like != null)
             {
+                if (!like.User1LikesUser2 && !like.User2LikesUser1)
+                    return false;
+                if (!firstLikeSecond)
+                {
+                    like.User1LikesUser2 = false;
+                    like.User2LikesUser1 = false;
+                    _db.Likes.Update(like);
+                    _db.SaveChanges();
+                    return true;
+                }
                 like.User1LikesUser2 = firstLikeSecond;
                 _db.Likes.Update(like);
-                isGoodResult = true;
+                _db.SaveChanges();
+                return true;
             }
             else
             {
-                like = user1.Likes.FirstOrDefault<Like>(l => l.User2Id == user1.Id && l.User1Id == user2.Id);
+
+                like = _db.Likes.FirstOrDefault<Like>(l => l.User2Id == user1.Id && l.User1Id == user2.Id);
 
                 if (like != null)
                 {
+                    if (!like.User1LikesUser2 && !like.User2LikesUser1)
+                        return false;
+                    if (!firstLikeSecond)
+                    {
+                        like.User1LikesUser2 = false;
+                        like.User2LikesUser1 = false;
+                        _db.Likes.Update(like);
+                        _db.SaveChanges();
+                        return true;
+                    }
                     like.User2LikesUser1 = firstLikeSecond;
                     _db.Likes.Update(like);
-                    isGoodResult = true;
+                    _db.SaveChanges();
+                    return true;
                 }
                 else
                 {
+
                     like = new();
                     like.User1Id = user1.Id;
                     like.User2Id = user2.Id;
-                    like.User1LikesUser2 = firstLikeSecond;
+                    if (firstLikeSecond)
+                    {
+                        like.User1LikesUser2 = firstLikeSecond;
+                    }
+                    else
+                    {
+                        like.User1LikesUser2 = false;
+                        like.User2LikesUser1 = false;
+                    }
                     _db.Likes.Add(like);
-                    isGoodResult = true;
+                    _db.SaveChanges();
+                    return true;
                 }
             }
-            _db.SaveChanges();
-            return isGoodResult;
         }
         [HttpGet]
         [Authorize]
@@ -276,7 +312,7 @@ namespace PlayAndConnect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Settings(string name, int selectGame, int age, bool ageCheck)
+        public async Task<IActionResult> Settings(string name, int selectGame, int age)
         {
             string? username;
             if (GetUsernameFromCookie(out username))
@@ -292,7 +328,6 @@ namespace PlayAndConnect.Controllers
                     {
                         userInfo.Age = age;
                         userInfo.Name = name;
-                        userInfo.ageIsMatter = ageCheck;
                         ICollection<Game>? games = user.Games;
                         if (games == null)
                         {
@@ -310,7 +345,6 @@ namespace PlayAndConnect.Controllers
                         UserInfo newUserInfo = new();
                         newUserInfo.Age = age;
                         newUserInfo.Name = name;
-                        newUserInfo.ageIsMatter = true;
                         ICollection<Game>? games = user.Games;
                         if (games == null)
                         {
@@ -330,13 +364,14 @@ namespace PlayAndConnect.Controllers
                     }
                 }
                 else
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Setting");
             }
             else
             {
                 return RedirectToAction("Index");
             }
         }
+        /*
         [NonAction]
         private User? GetUserForMetch()
         {
@@ -348,7 +383,7 @@ namespace PlayAndConnect.Controllers
                 {
                     UserInfo? info = user.Info;
                     IEnumerable<Like>? likes = user.Likes;
-                    if (likes != null)
+                    if (likes?.Any() == true)
                     {
                         int? userId = likes.FirstOrDefault(l => l.User1Id == user.Id && !l.User1LikesUser2 && l.User2LikesUser1)?.User2Id;
                         if (userId == null)
@@ -358,6 +393,95 @@ namespace PlayAndConnect.Controllers
                         if (userId != null)
                         {
                             return _db.Users.FirstOrDefault<User>(u => u.Id == userId);
+                        }
+                    }
+                    ICollection<Game>? games = user.Games;
+                    if (games?.Any() == true)
+                    {
+                        ICollection<Genre> genres = new List<Genre>();
+                        foreach (Game g in games)
+                        {
+                            if (!genres.Contains(g.Genre))
+                                genres.Add(g.Genre);
+                        }
+                        ICollection<Game> gamesFromGenre = new List<Game>();
+                        ICollection<Game> gamesMatch = new List<Game>();
+                        ICollection<User> usersMatch = new List<User>();
+                        ICollection<User>? usersFromGames = new List<User>();
+                        if (genres.Any())
+                        {
+                            foreach (Genre g in genres)
+                            {
+                                gamesFromGenre = g.Games;
+                                foreach (Game gem in gamesFromGenre)
+                                {
+                                    if (!gamesMatch.Contains(gem))
+                                    {
+                                        gamesMatch.Add(gem);
+                                    }
+                                }
+                            }
+                            foreach (Game ge in gamesMatch)
+                            {
+                                usersFromGames = ge.Users;
+                                if (usersFromGames?.Any() == true)
+                                {
+                                    foreach (User u in usersFromGames)
+                                    {
+                                        if (!usersMatch.Contains(u))
+                                        {
+                                            usersMatch.Add(u);
+                                        }
+                                    }
+                                    usersMatch.Remove(user);
+                                }
+                            }
+                            if (usersMatch.Any())
+                            {
+                                foreach (User returnUser in usersMatch)
+                                {
+                                    if (isUserNonInUnlike(user, returnUser))
+                                    {
+                                        return returnUser;
+                                    }
+                                }
+                                return null;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        TempData["Error"] = "No games";
+                        return null;
+                    }
+                }
+            }
+            return null;
+        }
+        */
+        [NonAction]
+        private async Task<User?> GetUserForMatch()
+        {
+            string? username;
+            if (GetUsernameFromCookie(out username))
+            {
+                User? user = await _db.Users.FirstOrDefaultAsync<User>(u => u.Login == username);
+                if (user != null)
+                {
+                    UserInfo? info = user.Info;
+                    Console.WriteLine("May be problem");
+                    IEnumerable<Like>? likes = _db.Likes.Where(l => l.User1Id == user.Id).ToList();
+                    if (likes != null)
+                    {
+                        int? userId = likes.FirstOrDefault(l => l.User1LikesUser2 == false && l.User2LikesUser1 == true)?.User2Id;
+                        if (userId == null)
+                        {
+                            likes = _db.Likes.Where(l => l.User2Id == user.Id).ToList();
+                            userId = likes.FirstOrDefault(l => l.User2LikesUser1 == true && l.User1LikesUser2 == false)?.User1Id;
+                        }
+                        if (userId != null)
+                        {
+                            return await _db.Users.FirstOrDefaultAsync<User>(u => u.Id == userId);
                         }
                     }
                     ICollection<Game> games = user.Games;
@@ -373,45 +497,50 @@ namespace PlayAndConnect.Controllers
                         ICollection<Game> gamesMatch = new List<Game>();
                         ICollection<User> usersMatch = new List<User>();
                         ICollection<User>? usersFromGames = new List<User>();
-                        foreach (Genre g in genres)
+                        if (genres != null)
                         {
-                            gamesFromGenre = g.Games;
-                            foreach (Game gem in gamesFromGenre)
+                            foreach (Genre g in genres)
                             {
-                                if (!gamesMatch.Contains(gem))
+                                gamesFromGenre = g.Games;
+                                foreach (Game gem in gamesFromGenre)
                                 {
-                                    gamesMatch.Add(gem);
-                                }
-                            }
-                        }
-                        foreach (Game ge in gamesMatch)
-                        {
-                            usersFromGames = ge.Users;
-                            if (usersFromGames != null)
-                            {
-                                foreach (User u in usersFromGames)
-                                {
-                                    if (!usersMatch.Contains(u))
+                                    if (!gamesMatch.Contains(gem))
                                     {
-                                        usersMatch.Add(u);
+                                        gamesMatch.Add(gem);
                                     }
                                 }
-                                usersMatch.Remove(user);
                             }
-                        }
-                        if (usersMatch == null)
-                            return null;
-                        else
-                        {
-                            foreach (User returnUser in usersMatch)
+                            foreach (Game ge in gamesMatch)
                             {
-                                if (isUserNonInUnlike(user, returnUser))
+                                usersFromGames = ge.Users;
+                                if (usersFromGames != null)
                                 {
-                                    return returnUser;
+                                    foreach (User u in usersFromGames)
+                                    {
+                                        if (!usersMatch.Contains(u))
+                                        {
+                                            usersMatch.Add(u);
+                                        }
+                                    }
+                                    usersMatch.Remove(user);
                                 }
                             }
-                            return null;
+                            if (usersMatch == null)
+                                return null;
+                            else
+                            {
+                                foreach (User returnUser in usersMatch)
+                                {
+                                    if (isUserNonInUnlike(user, returnUser))
+                                    {
+                                        return returnUser;
+                                    }
+                                }
+                                return null;
+                            }
                         }
+                        else
+                            return null;
 
                     }
                     else
@@ -427,9 +556,33 @@ namespace PlayAndConnect.Controllers
             else
                 return null;
         }
+
         [NonAction]
         private bool isUserNonInUnlike(User userWhoSearches, User userWhoChecked)
         {
+            Like? like = _db.Likes.FirstOrDefault<Like>(l => l.User1Id == userWhoSearches.Id && l.User2Id == userWhoChecked.Id);
+            if(like!= null)
+            {
+                if ((!like.User1LikesUser2 && !like.User2LikesUser1)
+                ||(like.User1LikesUser2&&!like.User2LikesUser1)
+                ||(like.User1LikesUser2&&like.User2LikesUser1))
+                    return false;
+                else return true;
+            }
+            else
+            {
+                like = _db.Likes.FirstOrDefault<Like>(l => l.User2Id == userWhoSearches.Id && l.User1Id == userWhoChecked.Id);
+            }
+            if (like != null)
+            {
+                if ((!like.User2LikesUser1 && !like.User1LikesUser2)
+                ||(like.User2LikesUser1&&!like.User1LikesUser2)
+                ||(like.User1LikesUser2&&like.User2LikesUser1))
+                    return false;
+                else return true;
+            }
+            else return true;
+            /*
             List<Like> chekedLikes = (List<Like>)userWhoChecked.Likes;
             if (chekedLikes == null)
                 return true;
@@ -445,6 +598,7 @@ namespace PlayAndConnect.Controllers
                 }
             }
             return true;
+            */
 
         }
         public IActionResult Privacy()

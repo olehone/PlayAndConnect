@@ -6,9 +6,9 @@ namespace PlayAndConnect.Models
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("User1")]
+        //[ForeignKey("User1")]
         public int User1Id { get; set; }
-        [ForeignKey("User2")]
+        //[ForeignKey("User2")]
         public int User2Id { get; set; }
         public bool User1LikesUser2 { get; set; }
         public bool User2LikesUser1 { get; set; }

@@ -11,7 +11,7 @@ namespace PlayAndConnect.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
 
         }
@@ -31,6 +31,7 @@ namespace PlayAndConnect.Data
             modelBuilder.Entity<User>().Property(p=> p.Login).HasMaxLength(15).IsRequired();
             modelBuilder.Entity<User>().HasOne(u=> u.Info).WithOne(i=> i.User).HasForeignKey<UserInfo>(x=> x.UserId).HasPrincipalKey<User>(u=> u.Id);
             modelBuilder.Entity<User>().HasMany(u=> u.Games).WithMany(g=> g.Users);
+            
             //modelBuilder.Entity<User>().HasMany(u=>u.Likes).WithOne(l=> l.User1);
             //modelBuilder.Entity<User>().HasMany(u=>u.Likes).WithOne(l=> l.User2);
 
