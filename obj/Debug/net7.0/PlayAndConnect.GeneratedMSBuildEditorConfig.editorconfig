@@ -16,8 +16,16 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Олег\Desktop\PlayAndConnect
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Олег/Desktop/PlayAndConnect/Views/Home/Account.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBY2NvdW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Олег/Desktop/PlayAndConnect/Views/Home/AddGame.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZGRHYW1lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Олег/Desktop/PlayAndConnect/Views/Home/Image.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbWFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Олег/Desktop/PlayAndConnect/Views/Home/Index.cshtml]
@@ -26,10 +34,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Олег/Desktop/PlayAndConnect/Views/Home/IndexForNew.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleEZvck5ldy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Олег/Desktop/PlayAndConnect/Views/Home/Like.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMaWtlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Олег/Desktop/PlayAndConnect/Views/Home/Login.cshtml]

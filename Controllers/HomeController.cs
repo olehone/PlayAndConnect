@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Xml.Schema;
+using System.Runtime.CompilerServices;
 using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
 using System.Security.AccessControl;
@@ -9,7 +10,6 @@ using PlayAndConnect.Models;
 using System.Diagnostics;
 using PlayAndConnect.Data;
 using PlayAndConnect.Data.Interfaces;
-using PlayAndConnect.ViewModels;
 using System.Security.Claims;
 using Pomelo.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication;
@@ -29,11 +29,14 @@ namespace PlayAndConnect.Controllers
         private readonly ApplicationDbContext _db;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserDb _userDb;
-        public HomeController(ApplicationDbContext db, IHttpContextAccessor httpContextAccessor, IUserDb userDb)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public HomeController(ApplicationDbContext db, IHttpContextAccessor httpContextAccessor, IUserDb userDb, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
             _httpContextAccessor = httpContextAccessor;
             _userDb = userDb;
+            _webHostEnvironment = webHostEnvironment;
         }
 
 
@@ -67,7 +70,7 @@ namespace PlayAndConnect.Controllers
             if (genre != null)
                 newGame.Genre = genre;
             else
-                newGame.Genre = _db.Genres.FirstOrDefault<Genre>(g => g.Id == 3);
+                return RedirectToAction("AddGame");
             _db.Games.Add(newGame);
             _db.SaveChanges();
             return RedirectToAction("AddGame");
@@ -135,12 +138,19 @@ namespace PlayAndConnect.Controllers
                 User? user = _db.Users.FirstOrDefault<User>(u => u.Login == username);
                 if (user == null)
                 {
-                    User newUser = new User { Login = username, PasswordHash = Hashing.HashPassword(password) };
-                    _db.Users.Add(newUser);
-                    _db.SaveChanges();
-                    await Authenticate(newUser.Login);
-                    return RedirectToAction("Settings");
-
+                    if (username.Length < 28)
+                    {
+                        User newUser = new User { Login = username, PasswordHash = Hashing.HashPassword(password) };
+                        _db.Users.Add(newUser);
+                        _db.SaveChanges();
+                        await Authenticate(newUser.Login);
+                        return RedirectToAction("Settings");
+                    }
+                    else
+                    {
+                        TempData["Error"] = "Задовгий логін";
+                        return RedirectToAction("Signup");
+                    }
                 }
                 else
                 {
@@ -195,6 +205,47 @@ namespace PlayAndConnect.Controllers
                 TempData["Error"] = "No user in match";
                 return RedirectToAction("Index");
             }
+        }
+        [Authorize]
+        [HttpGet]
+        public IActionResult Account(string login)
+        {
+            if (login == null)
+                return RedirectToAction("Index");
+            User? findUser = _db.Users.FirstOrDefault<User>(u => u.Login == login);
+            if (findUser == null)
+                return RedirectToAction("Index");
+            ViewBag.login = findUser.Login;
+            UserInfo? findInfo = _db.Infos.FirstOrDefault<UserInfo>(i => i.User == findUser);
+            if (findInfo == null)
+                RedirectToAction("Index");
+            ViewBag.username = findInfo.Name;
+            ViewBag.age = findInfo.Age;
+            ViewBag.imagePath = findInfo.ImagePath;
+            ViewBag.description = findInfo.Description;
+            string? currentUser = null;
+            if (GetUsernameFromCookie(out currentUser))
+            {
+                if (currentUser != null)
+                {
+                    if (isMatch(currentUser, login))
+                        ViewBag.contact = $"Info for match: {findInfo.Contact}";
+                }
+            }
+            Game? game = null;
+            game = _db.Games.FirstOrDefault<Game>(g => g.Users.Contains(findUser));
+            if (game != null)
+                ViewBag.game = game.Title;
+            else
+                ViewBag.description = "heh";
+            return View("Account");
+        }
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        [HttpPost]
+        public IActionResult Accounts(bool like)
+        {
+            return RedirectToAction("Index");
         }
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -307,36 +358,92 @@ namespace PlayAndConnect.Controllers
         [Authorize]
         public IActionResult Settings()
         {
+            string? username;
+            UserInfo? info = null;
+            if (GetUsernameFromCookie(out username))
+            {
+                info = _db.Infos.FirstOrDefault<UserInfo>(i => i.User.Login == username);
+            }
+            if (info != null)
+            {
+                @ViewBag.Name = info.Name;
+                @ViewBag.Age = info.Age;
+                @ViewBag.Description = info.Description;
+                @ViewBag.Contact = info.Contact;
+            }
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Settings(string name, int selectGame, int age)
+        public async Task<IActionResult> Settings(string name, int age, IFormFile imageFile, int selectGame = 1000000, string description = "No description", string contact = "No contact information")
         {
             string? username;
             if (GetUsernameFromCookie(out username))
             {
                 User? user = await _db.Users.FirstOrDefaultAsync<User>(u => u.Login == username);
+                bool isUserModif = false, isInfoModif = false;
                 UserInfo? userInfo = null;
+                Game? game = null;
                 if (user != null)
                     userInfo = user.Info;
-                Game? game = await _db.Games.FirstOrDefaultAsync<Game>(g => g.Id == selectGame);
+                if (selectGame != 1000000)
+                    game = await _db.Games.FirstOrDefaultAsync<Game>(g => g.Id == selectGame);
+                else
+                {
+                    game = await _db.Games.FirstOrDefaultAsync<Game>(g => g.Id == 1);
+                }
                 if (user != null && game != null && age > 7 && age < 100 && name != null)
                 {
                     if (userInfo != null)
                     {
                         userInfo.Age = age;
                         userInfo.Name = name;
+                        userInfo.Description = description;
+                        userInfo.Contact = contact;
+                        isInfoModif = true;
                         ICollection<Game>? games = user.Games;
                         if (games == null)
                         {
                             games = new List<Game>();
                             user.Games = games;
+                            games.Add(game);
+                            isUserModif = true;
                         }
-                        games.Add(game); // Додати гру до списку ігор
-                        _db.Infos.Update(userInfo);
-                        _db.Users.Update(user);
+                        else
+                        {
+                            if (!(games.Contains(game)))
+                            {
+                                games.Add(game);
+                                isUserModif = true;
+                                Console.WriteLine("Dont contains");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Contains all must be right");
+                                Console.WriteLine(games.FirstOrDefault<Game>().Title);
+                            }
+
+                        }
+                        if (imageFile != null && imageFile.Length > 0)
+                        {
+                            string uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+                            string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", uniqueFileName);
+                            using (var stream = new FileStream(imagePath, FileMode.Create))
+                            {
+                                await imageFile.CopyToAsync(stream);
+                            }
+                            userInfo.ImagePath = "/images/" + uniqueFileName; // Збереження шляху до зображення
+                            isInfoModif = true;
+                        }
+
+                        if (isInfoModif)
+                            _db.Infos.Update(userInfo);
+                        if (isUserModif)
+                        {
+                            Console.WriteLine("Update user");
+                            _db.Users.Update(user);
+                        }
                         await _db.SaveChangesAsync();
                         return RedirectToAction("Index");
                     }
@@ -345,6 +452,8 @@ namespace PlayAndConnect.Controllers
                         UserInfo newUserInfo = new();
                         newUserInfo.Age = age;
                         newUserInfo.Name = name;
+                        newUserInfo.Description = description;
+                        newUserInfo.Contact = contact;
                         ICollection<Game>? games = user.Games;
                         if (games == null)
                         {
@@ -352,12 +461,29 @@ namespace PlayAndConnect.Controllers
                             user.Games = games;
                         }
                         games.Add(game); // Додати гру до списку ігор
+
+                        if (imageFile != null && imageFile.Length > 0)
+                        {
+                            string uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+                            string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", uniqueFileName);
+                            using (var stream = new FileStream(imagePath, FileMode.Create))
+                            {
+                                await imageFile.CopyToAsync(stream);
+                            }
+                            newUserInfo.ImagePath = "/images/" + uniqueFileName; // Збереження шляху до зображення
+                        }
+                        else
+                        {
+                            newUserInfo.ImagePath = "/images/04e98869-5f47-4567-9f2f-4bbd32157bad_photo_2023-04-06_19-20-39.jpg";
+                        }
+
                         User? addingUser = await _db.Users.FirstOrDefaultAsync<User>(u => u.Login == username);
                         if (addingUser != null)
                         {
                             newUserInfo.User = addingUser;
                             newUserInfo.User.Info = newUserInfo;
                         }
+
                         _db.Users.Update(user);
                         await _db.SaveChangesAsync();
                         return RedirectToAction("Index");
@@ -371,94 +497,6 @@ namespace PlayAndConnect.Controllers
                 return RedirectToAction("Index");
             }
         }
-        /*
-        [NonAction]
-        private User? GetUserForMetch()
-        {
-            string? username;
-            if (GetUsernameFromCookie(out username))
-            {
-                User? user = _db.Users.FirstOrDefault<User>(u => u.Login == username);
-                if (user != null)
-                {
-                    UserInfo? info = user.Info;
-                    IEnumerable<Like>? likes = user.Likes;
-                    if (likes?.Any() == true)
-                    {
-                        int? userId = likes.FirstOrDefault(l => l.User1Id == user.Id && !l.User1LikesUser2 && l.User2LikesUser1)?.User2Id;
-                        if (userId == null)
-                        {
-                            userId = likes.FirstOrDefault(l => l.User2Id == user.Id && !l.User2LikesUser1 && l.User1LikesUser2)?.User2Id;
-                        }
-                        if (userId != null)
-                        {
-                            return _db.Users.FirstOrDefault<User>(u => u.Id == userId);
-                        }
-                    }
-                    ICollection<Game>? games = user.Games;
-                    if (games?.Any() == true)
-                    {
-                        ICollection<Genre> genres = new List<Genre>();
-                        foreach (Game g in games)
-                        {
-                            if (!genres.Contains(g.Genre))
-                                genres.Add(g.Genre);
-                        }
-                        ICollection<Game> gamesFromGenre = new List<Game>();
-                        ICollection<Game> gamesMatch = new List<Game>();
-                        ICollection<User> usersMatch = new List<User>();
-                        ICollection<User>? usersFromGames = new List<User>();
-                        if (genres.Any())
-                        {
-                            foreach (Genre g in genres)
-                            {
-                                gamesFromGenre = g.Games;
-                                foreach (Game gem in gamesFromGenre)
-                                {
-                                    if (!gamesMatch.Contains(gem))
-                                    {
-                                        gamesMatch.Add(gem);
-                                    }
-                                }
-                            }
-                            foreach (Game ge in gamesMatch)
-                            {
-                                usersFromGames = ge.Users;
-                                if (usersFromGames?.Any() == true)
-                                {
-                                    foreach (User u in usersFromGames)
-                                    {
-                                        if (!usersMatch.Contains(u))
-                                        {
-                                            usersMatch.Add(u);
-                                        }
-                                    }
-                                    usersMatch.Remove(user);
-                                }
-                            }
-                            if (usersMatch.Any())
-                            {
-                                foreach (User returnUser in usersMatch)
-                                {
-                                    if (isUserNonInUnlike(user, returnUser))
-                                    {
-                                        return returnUser;
-                                    }
-                                }
-                                return null;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        TempData["Error"] = "No games";
-                        return null;
-                    }
-                }
-            }
-            return null;
-        }
-        */
         [NonAction]
         private async Task<User?> GetUserForMatch()
         {
@@ -556,16 +594,38 @@ namespace PlayAndConnect.Controllers
             else
                 return null;
         }
-
+        [NonAction]
+        private bool isMatch(string loginWhoSearches, string loginWhoChecked)
+        {
+            User? userWhoSearches = _db.Users.FirstOrDefault<User>(u => u.Login == loginWhoSearches);
+            if (userWhoSearches == null)
+                return false;
+            User? userWhoChecked = _db.Users.FirstOrDefault<User>(u => u.Login == loginWhoChecked);
+            if (userWhoChecked == null)
+                return false;
+            Like? like = _db.Likes.FirstOrDefault<Like>(l => l.User1Id == userWhoSearches.Id && l.User2Id == userWhoChecked.Id);
+            if (like != null)
+            {
+                if (like.User1LikesUser2 && like.User2LikesUser1)
+                    return true;
+            }
+            like = _db.Likes.FirstOrDefault<Like>(l => l.User2Id == userWhoSearches.Id && l.User1Id == userWhoChecked.Id);
+            if (like != null)
+            {
+                if (like.User1LikesUser2 && like.User2LikesUser1)
+                    return true;
+            }
+            return false;
+        }
         [NonAction]
         private bool isUserNonInUnlike(User userWhoSearches, User userWhoChecked)
         {
             Like? like = _db.Likes.FirstOrDefault<Like>(l => l.User1Id == userWhoSearches.Id && l.User2Id == userWhoChecked.Id);
-            if(like!= null)
+            if (like != null)
             {
                 if ((!like.User1LikesUser2 && !like.User2LikesUser1)
-                ||(like.User1LikesUser2&&!like.User2LikesUser1)
-                ||(like.User1LikesUser2&&like.User2LikesUser1))
+                || (like.User1LikesUser2 && !like.User2LikesUser1)
+                || (like.User1LikesUser2 && like.User2LikesUser1))
                     return false;
                 else return true;
             }
@@ -576,30 +636,12 @@ namespace PlayAndConnect.Controllers
             if (like != null)
             {
                 if ((!like.User2LikesUser1 && !like.User1LikesUser2)
-                ||(like.User2LikesUser1&&!like.User1LikesUser2)
-                ||(like.User1LikesUser2&&like.User2LikesUser1))
+                || (like.User2LikesUser1 && !like.User1LikesUser2)
+                || (like.User1LikesUser2 && like.User2LikesUser1))
                     return false;
                 else return true;
             }
             else return true;
-            /*
-            List<Like> chekedLikes = (List<Like>)userWhoChecked.Likes;
-            if (chekedLikes == null)
-                return true;
-            int checkId = userWhoChecked.Id;
-            foreach (Like checkLike in chekedLikes)
-            {
-                if (checkLike.User1Id == checkId || checkLike.User2Id == checkId)
-                {
-                    if (!checkLike.User1LikesUser2 && !checkLike.User2LikesUser1)
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
-            */
-
         }
         public IActionResult Privacy()
         {

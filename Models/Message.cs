@@ -9,5 +9,11 @@ namespace PlayAndConnect.Models
         public Chat Chat { get; set; }
         public User User { get; set; }
         public string Text { get; set; }
+        public Message(Chat chat, User user, string text)
+        {
+            TimeOfSending = DateTime.Now;
+            Chat = chat;
+            User = user;
+        }
     }
 }

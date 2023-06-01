@@ -10,7 +10,9 @@ public class UserInfo
     [Range(7, 100)]
     public int Age { get; set; } = 18;
     public string? Name { get; set; }
-    public string? ImgURL { get; set; }
+    public string? ImagePath { get; set; }
+    public string? Description {get; set;}
+    public string? Contact {get; set;}
     public User User { get; set; }
     public int UserId { get; set;}
 }

@@ -8,23 +8,29 @@
 <body>
   <div class="container">
     <h2>Account info</h2>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
       <p class="error">
         @ViewBag.Error
       </p>
+<div class="input-field">
+    <input type="text" name="name" placeholder="Enter your name" class="name" required value="@ViewBag.Name" />
+</div>
+<div class="input-field">
+    <input type="number" name="age" placeholder="Enter your age" class="age" required max="100" min="7" value="@ViewBag.Age" />
+</div>
+<div class="input-field">
+    <textarea name="description" placeholder="Description like 'Hello, I'm a gamer' or something" class="name" required>@ViewBag.Description</textarea>
+</div>
+<div class="input-field">
+    <textarea name="contact" placeholder="Information for the match. Users with whom you have a shared match will see this" class="contact" required>@ViewBag.Contact</textarea>
+</div>
+
       <div class="input-field">
-        <input type="number" name="age" placeholder="Enter your age" class="age" required max = "100", min = "7"/>
-      </div>
-      @*<div>
-  <input type="checkbox" name="ageCheck" value="true" id = "myCheckBox">
-  <label for="myCheckbox">Чи важливий вік іншої людини?</label>
-</div>*@
-      <div class="input-field">
-        <input type="text" name="name" placeholder="Enter your name" class="name" required/>
+        <input type="file" name="imageFile" accept="image/*" />
       </div>
       <div>
-        <input type="text" id="gameNameInput" oninput="getGameOptions()">
-        <select id="gameOptions" size="5" name = "selectGame"></select>
+        <input type="text" id="gameNameInput" oninput="getGameOptions()" />
+        <select id="gameOptions" size="5" name="selectGame"></select>
       </div>
       <div class="input-field button">
         <input type="submit" name="submit" value="Submit Now" />

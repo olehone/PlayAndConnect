@@ -11,7 +11,7 @@ namespace PlayAndConnect.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            //Database.EnsureDeleted();
+            Database.EnsureDeleted();
             Database.EnsureCreated();
 
         }
@@ -28,7 +28,7 @@ namespace PlayAndConnect.Data
             base.OnModelCreating(modelBuilder);
             //User
             modelBuilder.Entity<User>().Property(p=> p.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<User>().Property(p=> p.Login).HasMaxLength(15).IsRequired();
+            modelBuilder.Entity<User>().Property(p=> p.Login).HasMaxLength(30).IsRequired();
             modelBuilder.Entity<User>().HasOne(u=> u.Info).WithOne(i=> i.User).HasForeignKey<UserInfo>(x=> x.UserId).HasPrincipalKey<User>(u=> u.Id);
             modelBuilder.Entity<User>().HasMany(u=> u.Games).WithMany(g=> g.Users);
             
@@ -39,8 +39,8 @@ namespace PlayAndConnect.Data
 
             //UserInfo
             modelBuilder.Entity<UserInfo>().Property(p=> p.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<UserInfo>().Property(p=>p.ImgURL).IsRequired(false);
-            modelBuilder.Entity<UserInfo>().Property(p=> p.Name).IsRequired(false);
+            modelBuilder.Entity<UserInfo>().Property(p=>p.ImagePath).IsRequired(false);
+            //modelBuilder.Entity<UserInfo>().Property(p=> p.Name).IsRequired(false);
 
             //Game
             modelBuilder.Entity<Game>().Property(g=> g.Id).ValueGeneratedOnAdd();
