@@ -1,0 +1,104 @@
+@using PlayAndConnect.ViewModels
+@model List<MessageViewModel>
+<div class = "chat-info">
+    <div class="chat-item" data-login="ViewBag.Login">
+        <div class="user-info">
+            <div class="avatar">
+                <a href="@Url.Action("Account", "Home", new { login = ViewBag.Login })">
+                    <img class="user-image" src="ViewBag.ImagePath" style="cursor: pointer;">
+                </a>
+            </div>
+            <div class="user-details">
+                <h3 class="chat-login">ViewBag.Login</h3>
+            </div>
+        </div>
+    </div>
+</div>
+@*
+<div class="chat-list">
+    @foreach (var message in Model)
+    {
+        <div class="chat-item" data-login="@message.IsOwn">
+            <div class="user-info">
+                <div class="avatar">
+                    <a href="@Url.Action("Account", "Home", new { login = message.Login })">
+                        <img class="user-image" src="@message.ImagePath" style="cursor: pointer;">
+                    </a>
+                </div>
+                <div class="user-details">
+                    <h3 class="chat-login">@message.Login</h3>
+                    <p class="chat-message @(message.IsOwn ? "own-message" : "other-message")">@message.Text</p>
+                    <span class="message-time">@message.Time</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+*@
+.chat-item {
+  /* Стилі для блоку чату */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+.user-info {
+  /* Стилі для інформації про користувача */
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: #dcdcdc;
+  border-radius: 5px;
+}
+
+.avatar {
+  /* Стилі для аватарки */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-details {
+  /* Стилі для деталей користувача */
+  flex-grow: 1;
+}
+
+.chat-login {
+  /* Стилі для логіну користувача */
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.chat-message {
+  /* Стилі для повідомлення */
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.own-message {
+  /* Стилі для свого повідомлення */
+  text-align: right;
+}
+
+.other-message {
+  /* Стилі для чужого повідомлення */
+  text-align: left;
+}
+
+.message-time {
+  /* Стилі для часу повідомлення */
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}
+
+.chat-form {
+  /* Стилі для форми введення повідомлень */
+  margin-top: 10px;
+}
+

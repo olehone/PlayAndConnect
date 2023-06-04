@@ -5,15 +5,10 @@ namespace PlayAndConnect.Models
     {
         [Key]
         public int Id { get; set; }
+        //public bool isRead {get;set;} = false;
         public DateTime TimeOfSending { get; set; }
         public Chat Chat { get; set; }
-        public User User { get; set; }
-        public string Text { get; set; }
-        public Message(Chat chat, User user, string text)
-        {
-            TimeOfSending = DateTime.Now;
-            Chat = chat;
-            User = user;
-        }
+        public User? User { get; set; }
+        public string? Text { get; set; }
     }
 }

@@ -1,6 +1,5 @@
-function getGameOptionsPlease() {
+function getMessages(options) {
     var gameName = $('#gameNameInput').val();
-    
     $.ajax({
       url: '/Home/LHssdhsaoidhgaoeghaiwodiejg',
       type: 'POST',

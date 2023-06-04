@@ -26,7 +26,6 @@ function populateGameOptions(options) {
     var optionElement = $('<option>').text(option.title).val(option.id);
     gameOptionsSelect.append(optionElement);
   }
-
   // При виборі гри автоматично записуємо її назву в рядок пошуку
   gameOptionsSelect.on('change', function() {
     var selectedGame = $(this).find('option:selected').text();

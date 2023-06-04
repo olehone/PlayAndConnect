@@ -13,7 +13,7 @@ namespace PlayAndConnect.Models
 
         public ICollection<Game> Games {get; set;} 
         public ICollection<Like> Likes { get; set; }
-        //public virtual ICollection<Chat> Chats { get; set; }
-        //public virtual ICollection<Message> Messages { get; set; }
+        public virtual ICollection<Chat> Chats { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

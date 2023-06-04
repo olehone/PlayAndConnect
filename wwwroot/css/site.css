@@ -38,13 +38,12 @@ body {
   font-weight: 600;
 }
 
-
 h2 {
   color: #365679; 
 }
 
 body {
-   min-height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center; 
@@ -52,7 +51,7 @@ body {
 }
 .container {
   position: relative;
-  max-width: 370px;
+  max-width: 900px;
   width: 100%;
   padding: 25px;
   border-radius: 8px;
@@ -133,48 +132,43 @@ form .input-field {
 }
 
 .topnav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 13px;
+  background-color: #385a7b;
+  overflow: hidden;
+}
 
-    padding: 13px;
+.topnav a {
+  float: right;
+  color: #002c4b;
+  background-color: #f3f6fa;
+  text-align: center;
+  padding: 17px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 600;
+}
 
-    background-color: #385a7b;
-    overflow: hidden;
-  }
-  
-  .topnav a {
-    float: right;
-    color: #002c4b;
-    background-color: #f3f6fa;
-    text-align: center;
-    padding: 17px;
-    text-decoration: none;
-    font-size: 17px;
-    font-weight: 600;
-    
-    
-  }
-  
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .topnav a.active {
-    background-color: #002c4b;
-    color: #afc1d0;
-  }
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
 
+.topnav a.active {
+  background-color: #002c4b;
+  color: #afc1d0;
+}
 
 .recover a {
   text-decoration: none;
   color: gray;
-  font-size: 14px; 
-
+  font-size: 14px;
 }
+
 .recover {
   display: flex;
   justify-content: flex-end;
@@ -184,28 +178,28 @@ form .input-field {
   color: gray;
   display: flex;
   justify-content: center;
-  font-size: 14px; 
+  font-size: 14px;
   margin-top: 0.9rem;
 }
 
 .member a {
-  color: #385a7b; 
+  color: #385a7b;
   text-decoration: none;
 }
 
-/* Create two columns/boxes that floats next to each other */
+/* Create two columns/boxes that float next to each other */
 
-.list{
+.list {
   padding: 3rem;
   overflow: hidden;
-  padding:3rem;
+  padding: 3rem;
   width: 70%;
   margin-left: 30%;
 }
 
-.line{
-  margin-bottom: 1 rem;
-  display:flex;
+.line {
+  margin-bottom: 1rem;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: white;
@@ -213,44 +207,44 @@ form .input-field {
   border-radius: 0.3rem;
   transition: all 0.3s;
 }
-.name{
+.name {
   font-size: 1rem;
-  color:black;
+  color: black;
 }
-.username{
+.username {
   font-size: 0.8rem;
-  color: rgba(162,162,162);
+  color: rgba(162, 162, 162);
 }
-p{
+p {
   font-size: 0.8rem;
   color: #111;
   font-weight: 500;
 }
-.user{
+.user {
   display: flex;
-  justify-content:space-between;
-  align-items:center;
+  justify-content: space-between;
+  align-items: center;
 }
-.profile img{
-  width:3.5rem;
-  height:3.5rem;
+.profile img {
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
   object-fit: cover;
 }
-.user .details{
+.user .details {
   margin-left: 1.5rem;
   line-height: 1.3;
   text-transform: capitalize;
 }
-.btn{
-  display:inline-block;
-  background-color: rgba(14,131,214);
-  color:white;
-  padding:0.4rem 0.8rem;
+.btn {
+  display: inline-block;
+  background-color: rgba(14, 131, 214);
+  color: white;
+  padding: 0.4rem 0.8rem;
   font-size: 0.8rem;
   border-radius: 0.2rem;
 }
-a{
+a {
   text-decoration: none;
 }
 
