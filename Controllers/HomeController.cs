@@ -1,4 +1,5 @@
-﻿using System.Xml.Schema;
+﻿using System.Timers;
+using System.Xml.Schema;
 using System.Runtime.CompilerServices;
 using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
@@ -21,6 +22,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using PlayAndConnect.ViewModels;
 
 namespace PlayAndConnect.Controllers
 {
@@ -71,7 +73,7 @@ namespace PlayAndConnect.Controllers
                 newGame.Genre = genre;
             else
                 return RedirectToAction("AddGame");
-            _db.Games.Add(newGame);
+            await _db.Games.AddAsync(newGame);
             _db.SaveChanges();
             return RedirectToAction("AddGame");
         }
@@ -239,6 +241,264 @@ namespace PlayAndConnect.Controllers
             else
                 ViewBag.description = "heh";
             return View("Account");
+        }/*
+[Authorize]
+        [HttpGet]
+        public IActionResult Chat()
+        {
+            return PartialView();
+        }*/
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> GetMessages(string interlocutorLogin)
+        {
+            string? currentUserLogin = null;
+            if (GetUsernameFromCookie(out currentUserLogin))
+            {
+                Console.WriteLine("!");
+                User? currentUser = await _db.Users.FirstOrDefaultAsync<User>(u => u.Login == currentUserLogin);
+                User? interlocutor = await _db.Users.FirstOrDefaultAsync<User>(u => u.Login == interlocutorLogin);
+                Console.WriteLine("All right");
+                if (currentUser != null && interlocutor != null)
+                {
+                    Console.WriteLine("!124212");
+                    Console.WriteLine(currentUser.Login);
+                    Console.WriteLine(interlocutor.Login);
+
+                    //Chat? chat = _db.Chats.FirstOrDefault(c => c.Id==1);
+                    Chat? chat = await _db.Chats.FirstOrDefaultAsync<Chat>(c => c.Users.Any(u => u.Id == currentUser.Id) && c.Users.Any(u => u.Id == interlocutor.Id));
+                    //Chat? chat = _db.Chats.FirstOrDefault(c => c.Users.Contains(currentUser) && c.Users.Contains(interlocutor));
+                    if (chat != null)
+                    {
+                        Console.WriteLine("!124124124124");
+                        List<MessageViewModel> messagesForView = new();
+                        List<Message> messagesFromDb = await _db.Messages.Where<Message>(m => m.Chat == chat).ToListAsync();
+                        foreach (Message m in messagesFromDb)
+                        {
+                            MessageViewModel mForView = new();
+                            if (m.User == null)
+                                mForView.IsSystem = true;
+                            else
+                                mForView.IsSystem = false;
+                            if (m.User == currentUser)
+                                mForView.IsOwn = true;
+                            else
+                                mForView.IsOwn = false;
+                            if (m.Text != null)
+                                mForView.Text = m.Text;
+                            else mForView.Text = "Не вийшло отримати повідомлення";
+                            mForView.Time = m.TimeOfSending.ToString("dd MMMM HH:mm");
+                            messagesForView.Add(mForView);
+                            Console.WriteLine("!1134134613");
+                        }
+                        Console.WriteLine("!443141");
+                        return Json(messagesForView);
+                    }
+                    else
+                    {
+                        Console.WriteLine("All so geioghaljkdbad");
+                        return Ok();
+                    }
+
+                }
+                Console.WriteLine("All rightasdsadgasgdag");
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Login");
+        }
+        [Authorize]
+        [HttpGet]
+        public IActionResult Chats()
+        {
+            string? currentUserLogin = null;
+            if (GetUsernameFromCookie(out currentUserLogin))
+            {
+                User? user = _db.Users.FirstOrDefault<User>(u => u.Login == currentUserLogin);
+                if (user != null)
+                {
+                    List<Chat>? chats = new();
+                    chats = _db.Chats.Include(c => c.Users)
+                                    .ThenInclude(u => u.Info)
+                                    .Where(c => c.Users.Contains(user))
+                                    .ToList();
+                    if (chats != null)
+                    {
+                        Console.WriteLine("Chats not null");
+                        List<ChatViewModel>? userChats = new List<ChatViewModel>();
+                        foreach (Chat c in chats)
+                        {
+                            Console.WriteLine("I make a chaaat");
+                            ChatViewModel? userChat = new();
+                            User? notCurrentUser = null;
+                            notCurrentUser = c.Users.FirstOrDefault<User>(u => u.Id != user.Id);
+                            if (notCurrentUser != null)
+                            {
+                                Console.WriteLine("Chats or noooooooooooooooooooo");
+                                Message? message = GetLastMessage(c);
+                                if (message != null)
+                                {
+                                    if (message.Text != null)
+                                        userChat.Message = message.Text;
+                                    else
+                                        userChat.Message = "Cant read message";
+                                    userChat.TimeOfLastMessage = message.TimeOfSending;
+                                    if (message.Id == c.Messages.Max(m => m.Id))
+                                        userChat.IsNew = true;
+                                }
+                                Console.WriteLine(userChat.Message);
+                                userChat.Login = notCurrentUser.Login;
+                                Console.WriteLine(userChat.Login);
+                                UserInfo? info = _db.Infos.FirstOrDefault<UserInfo>(i => i.User == notCurrentUser);
+                                Console.WriteLine(info.Id);
+                                userChat.ImagePath = info.ImagePath;
+                                Console.WriteLine(userChat.ImagePath);
+                                userChat.IsSelected = false;
+                                userChats.Add(userChat);
+                            }
+                            else
+                                Console.WriteLine("Baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad");
+
+                        }
+                        /*
+                        ViewBag.Chats = chats.Select(c => new
+                        {
+                            User = c.Users.Where(u => u.Login != currentUserLogin)
+                            .Select(u => new { Login = u.Login, ImagePath = u.Info.Name }),
+                            LastMessageText = GetLastMessage(c)
+                        });*/
+                        if (userChats.Any())
+                        {
+                            Console.WriteLine(userChats.FirstOrDefault().Message);
+                            List<ChatViewModel> sortedChats = userChats.OrderBy(chat => chat.TimeOfLastMessage).Reverse().ToList();
+                            //sortedChats.Remove(sortedChats.LastOrDefault(c=> c.Message!="salgjas"));
+                            ViewBag.Chats = sortedChats;
+                            foreach (ChatViewModel chat in userChats)
+                            {
+                                Console.WriteLine(chat.Message);
+                                Console.WriteLine(chat.Login);
+                                Console.WriteLine(chat.ImagePath);
+                                Console.WriteLine("LHafhs");
+
+                            }
+                            Console.WriteLine("SORTED");
+                            foreach (ChatViewModel chat in sortedChats)
+                            {
+                                Console.WriteLine(chat.Message);
+                                Console.WriteLine(chat.Login);
+                                Console.WriteLine(chat.ImagePath);
+                                Console.WriteLine("LHafhs");
+
+                            }
+                            return View();
+                        }
+                        ViewBag.SysMessage = " No chats. Go to mathes!";
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.SysMessage = "Error: No chats";
+                        return RedirectToAction("Match");
+                    }
+                }
+                else
+                {
+                    TempData["SysMessage"] = "Error: No matches";
+                    return View();
+                }
+            }
+            else
+            {
+                TempData["SysMessage"] = "Error: Non in system. Login, please";
+                return RedirectToAction("Login");
+            }
+        }
+        [Authorize]
+        [HttpPost]
+        public bool SendMessage(string message, string login)
+        {
+            string? currentUserLogin = null;
+
+            if (GetUsernameFromCookie(out currentUserLogin))
+            {
+                User? currentUser = _db.Users.FirstOrDefault<User>(u => u.Login == currentUserLogin);
+                if (currentUser != null)
+                {
+                    Chat? chat = _db.Chats.FirstOrDefault(c => c.Users.Any(u => u.Login == login) && c.Users.Any(u => u.Login == currentUserLogin));
+                    if (chat != null)
+                    {
+                        Console.WriteLine("lsdglhasldgh");
+                        Message? messageForChat = new();
+                        messageForChat.Text = message;
+                        messageForChat.TimeOfSending = DateTime.Now;
+                        messageForChat.User = currentUser;
+                        messageForChat.Chat = chat;
+                        if (chat.Messages != null)
+                            chat.Messages.Add(messageForChat);
+                        else
+                        {
+                            chat.Messages = new List<Message>();
+                            chat.Messages.Add(messageForChat);
+                        }
+                        _db.Chats.Update(chat);
+                        _db.Messages.Add(messageForChat);
+                        _db.SaveChanges();
+                        return true;
+                    }
+                    else return false;
+                }
+                else return false;
+
+                /*
+                User? currentUser = _db.Users.FirstOrDefault<User>(u => u.Login == currentUserLogin);
+                if (currentUser != null)
+                {
+                    User? otherUser = _db.Users.FirstOrDefault<User>(u => u.Login == login);
+                    if (otherUser != null)
+                    {
+                        Chat? currentChat = null;
+
+                    }
+                    else
+                        return false;
+                }
+                else
+                    return false;*/
+            }
+            else return false;
+        }
+        [Authorize]
+        [HttpGet]
+        public PartialViewResult? currentAccount(string login)
+        {
+            if (login == null)
+                return null;//PartialView();
+            User? findUser = _db.Users.FirstOrDefault<User>(u => u.Login == login);
+            if (findUser == null)
+                return null;//RedirectToAction("Index");
+            ViewBag.login = findUser.Login;
+            UserInfo? findInfo = _db.Infos.FirstOrDefault<UserInfo>(i => i.User == findUser);
+            if (findInfo == null)
+                return null;//RedirectToAction("Index");
+            ViewBag.username = findInfo.Name;
+            ViewBag.age = findInfo.Age;
+            ViewBag.imagePath = findInfo.ImagePath;
+            ViewBag.description = findInfo.Description;
+            string? currentUser = null;
+            if (GetUsernameFromCookie(out currentUser))
+            {
+                if (currentUser != null)
+                {
+                    if (isMatch(currentUser, login))
+                        ViewBag.contact = $"Info for match: {findInfo.Contact}";
+                }
+            }
+            Game? game = null;
+            game = _db.Games.FirstOrDefault<Game>(g => g.Users.Contains(findUser));
+            if (game != null)
+                ViewBag.game = game.Title;
+            else
+                ViewBag.description = "heh";
+            return PartialView("Account");
         }
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -288,14 +548,61 @@ namespace PlayAndConnect.Controllers
             {
                 return RedirectToAction("Match");
             }
+        }
+        [NonAction]
+        private bool CreateNewChat(User user1, User user2)
+        {
+            Console.WriteLine("Newwwww chaaaaat");
+            Console.WriteLine(user1.Login);
+            Console.WriteLine(user2.Login);
+            Chat? chat = _db.Chats.FirstOrDefault(c => c.Users.Any(u => u.Id == user1.Id) && c.Users.Any(u => u.Id == user2.Id));
 
+            //Chat? chat = _db.Chats.FirstOrDefault<Chat>(c => c.Users.Contains(user1) && c.Users.Contains(user2));
+            if (chat == null)
+            {
+                Chat newChat = new();
+                newChat.Messages = new List<Message>();
+                newChat.Users = new List<User>();
+                newChat.Users.Add(user1);
+                newChat.Users.Add(user2);
+                Console.WriteLine("Add users");
+                Message message = new();//CreatingMessage(newChat, null, "Взаємний інтерес! Чат створено");
+                message.Chat = newChat;
+                message.Text = "Взаємний інтерес! Чат створено";
+                message.User = null;
+                message.TimeOfSending = DateTime.Now;
+                newChat.Messages.Add(message);
+                _db.Add<Message>(message);
+                _db.Add<Chat>(newChat);
+                _db.SaveChanges();
+                Console.WriteLine("SaveChanges");
+                return true;
+            }
+            else return false;
+        }
+        [NonAction]
+        private bool addSystemMessage(Chat chat, string text)
+        {
+            //Chat? chat = _db.Chats.FirstOrDefault<Chat>(c => c.Users.Contains(user1) && c.Users.Contains(user2));
+            if (chat != null)
+            {
+                Message message = new CreatingMessage(chat, null, text);
+                _db.Add<Message>(message);
+                _db.Update<Chat>(chat);
+                _db.SaveChanges();
+                return true;
+            }
+            else return false;
         }
         [NonAction]
         private bool UpDateLike(User user1, User user2, bool firstLikeSecond)
         {
+            Console.WriteLine("1132513");
             Like? like = _db.Likes.FirstOrDefault<Like>(l => l.User1Id == user1.Id && l.User2Id == user2.Id);
             if (like != null)
             {
+                Console.WriteLine("2");
+
                 if (!like.User1LikesUser2 && !like.User2LikesUser1)
                     return false;
                 if (!firstLikeSecond)
@@ -307,8 +614,15 @@ namespace PlayAndConnect.Controllers
                     return true;
                 }
                 like.User1LikesUser2 = firstLikeSecond;
+                Console.WriteLine("3253325");
+
                 _db.Likes.Update(like);
                 _db.SaveChanges();
+                if (like.User1LikesUser2 && like.User2LikesUser1)
+                {
+                    Console.WriteLine("Must create a new chat!");
+                    CreateNewChat(user1, user2);
+                }
                 return true;
             }
             else
@@ -331,6 +645,11 @@ namespace PlayAndConnect.Controllers
                     like.User2LikesUser1 = firstLikeSecond;
                     _db.Likes.Update(like);
                     _db.SaveChanges();
+                    if (like.User1LikesUser2 && like.User2LikesUser1)
+                    {
+                        Console.WriteLine("Must create a new chat!");
+                        CreateNewChat(user1, user2);
+                    }
                     return true;
                 }
                 else
@@ -474,7 +793,7 @@ namespace PlayAndConnect.Controllers
                         }
                         else
                         {
-                            newUserInfo.ImagePath = "/images/04e98869-5f47-4567-9f2f-4bbd32157bad_photo_2023-04-06_19-20-39.jpg";
+                            newUserInfo.ImagePath = "/images/default.jpg";
                         }
 
                         User? addingUser = await _db.Users.FirstOrDefaultAsync<User>(u => u.Login == username);
@@ -514,20 +833,25 @@ namespace PlayAndConnect.Controllers
                         int? userId = likes.FirstOrDefault(l => l.User1LikesUser2 == false && l.User2LikesUser1 == true)?.User2Id;
                         if (userId == null)
                         {
+                            Console.WriteLine("May be problem1");
                             likes = _db.Likes.Where(l => l.User2Id == user.Id).ToList();
                             userId = likes.FirstOrDefault(l => l.User2LikesUser1 == true && l.User1LikesUser2 == false)?.User1Id;
                         }
                         if (userId != null)
                         {
+                            Console.WriteLine("May be problem2");
                             return await _db.Users.FirstOrDefaultAsync<User>(u => u.Id == userId);
                         }
                     }
                     ICollection<Game> games = user.Games;
+                    Console.WriteLine("May be problem3");
                     if (games != null)
                     {
                         ICollection<Genre> genres = new List<Genre>();
+                        Console.WriteLine("May be problem4");
                         foreach (Game g in games)
                         {
+                            Console.WriteLine("May be problem5");
                             if (!genres.Contains(g.Genre))
                                 genres.Add(g.Genre);
                         }
@@ -537,26 +861,42 @@ namespace PlayAndConnect.Controllers
                         ICollection<User>? usersFromGames = new List<User>();
                         if (genres != null)
                         {
+                            Console.WriteLine("May be problem6");
                             foreach (Genre g in genres)
                             {
-                                gamesFromGenre = g.Games;
-                                foreach (Game gem in gamesFromGenre)
+                                Console.WriteLine("May be problem7");
+                                if (g != null)
                                 {
-                                    if (!gamesMatch.Contains(gem))
+                                    gamesFromGenre = g.Games;
+                                    foreach (Game gem in gamesFromGenre)
                                     {
-                                        gamesMatch.Add(gem);
+                                        Console.WriteLine("May be problem8");
+                                        if (!gamesMatch.Contains(gem))
+                                        {
+                                            Console.WriteLine("May be problem9");
+                                            gamesMatch.Add(gem);
+                                        }
                                     }
+                                }
+                                else
+                                {
+
+                                    Console.WriteLine("May be problem23r2e6");
+                                    return null;
                                 }
                             }
                             foreach (Game ge in gamesMatch)
                             {
+                                Console.WriteLine("May be problem12");
                                 usersFromGames = ge.Users;
                                 if (usersFromGames != null)
                                 {
+                                    Console.WriteLine("May be problem122");
                                     foreach (User u in usersFromGames)
                                     {
                                         if (!usersMatch.Contains(u))
                                         {
+                                            Console.WriteLine("May be problem235135");
                                             usersMatch.Add(u);
                                         }
                                     }
@@ -657,6 +997,18 @@ namespace PlayAndConnect.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [NonAction]
+        private Message? GetLastMessage(Chat chat)
+        {
+            Message? message = null;
+
+            if (chat.Messages != null && chat.Messages.Any())
+            {
+                //message = chat.Messages.FirstOrDefault<Message>(m => m.Id == chat.Messages.Max<Message>(m => m.Id));
+                message = chat.Messages.LastOrDefault();
+            }
+            return message;
+        }
         [HttpPost]
         public IActionResult GetGameOptions(string gameName)
         {
@@ -669,9 +1021,25 @@ namespace PlayAndConnect.Controllers
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
             };
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = true,
+                ExpiresUtc = DateTime.UtcNow.AddDays(15) // Додаємо 15 днів до поточної дати
+            };
+            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id), authProperties);
+        }
+        /*
+        private async Task Authenticate(string userName)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+            };
+
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-        }
+        }*/
         [HttpGet]
         [Authorize]
         public IActionResult AddGenres()
@@ -805,6 +1173,5 @@ namespace PlayAndConnect.Controllers
                     return "No description available.";
             }
         }
-
     }
 }

@@ -1,0 +1,387 @@
+@using PlayAndConnect.ViewModels
+@model List<ChatViewModel>
+
+<style>
+    /* Оновлені стилі */
+
+    .chat-container {
+        display: flex;
+        min-height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .chat-list {
+        flex: 3;
+        overflow-y: scroll;
+        margin-right: 20px;
+    }
+
+    .chat {
+        flex: 7;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chat-messages {
+        flex-grow: 1;
+        overflow-y: scroll;
+        margin-bottom: 20px;
+        
+        background-color: #f9f9f9;
+    }
+
+    .chat-input {
+        display: flex;
+        margin-top: 10px;
+    }
+
+    .chat-input input[type="text"] {
+        flex-grow: 1;
+        margin-right: 10px;
+        padding: 5px;
+    }
+
+    .chat-input button {
+        padding: 5px 10px;
+        background-color: #1b6ec2;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+
+<div class="chat-container">
+    <div class="chat-list">
+        @ViewBag.SysMessage
+        @foreach (ChatViewModel chat in ViewBag.Chats)
+        {
+            <div class="chat-item @(chat.IsSelected ? "selected" : "")" data-login="@chat.Login">
+                <div class="user-info">
+                    <div class="avatar">
+                        <a href="@Url.Action("Account", "Home", new { login = chat.Login })">
+                            <img class="user-image" src="@chat.ImagePath" style="cursor: pointer;">
+                        </a>
+                    </div>
+                    <div class="user-details">
+                        <h3 class="chat-login">@chat.Login</h3>
+                        @if (@chat.IsNew)
+                        {
+                            <p class="chat-new-message">@chat.Message</p>
+                        }
+                        else
+                        {
+                            <p class="chat-message">@chat.Message</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="chat">
+        <p> Виберіть час</p>
+        <div class="chat-messages">
+            <p>Виберіть чат</p>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" placeholder="Введіть повідомлення" id = "message-input">
+           <button id="send-button">Надіслати</button>
+        </div>
+    </div>
+</div>
+<style>
+    body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #dce8f1;
+        margin: 10% 0;
+    }
+
+.container {
+  position: relative;
+  max-width: 1200px;
+  min-height: 1000px;
+  width: 100%;
+  padding: 5% 1% 5% 1%; /* Відступи зверху й знизу - 5% */
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.chat-container {
+  display: flex;
+  height: calc(98% - 4px); /* Знижуємо висоту на 10% */
+}
+
+.chat-list {
+  width: 30%;
+  overflow-y: auto;
+  margin-right: 5%; /* Відступ праворуч - 5% */
+}
+
+.chat {
+  width: 65%; /* Змінюємо ширину на 65% */
+  overflow-y: auto;
+}
+
+    .chat-input {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .chat-input input {
+        flex: 1;
+        height: 40px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        padding: 0 10px;
+    }
+
+    .chat-input button {
+        height: 40px;
+        margin-left: 10px;
+        padding: 0 15px;
+        border: none;
+        border-radius: 4px;
+        background-color: #314e6b;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .chat-input button:hover {
+        background-color: #2c435c;
+    }
+
+    /* Решта стилів... */
+
+    .chat-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        transition: background-color 0.3s;
+        background-color: #f9f9f9;
+    }
+
+    .chat-item:hover:not(.selected) {
+        background-color: #f5f5f5;
+    }
+
+    .selected {
+        background-color: #ebebeb;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .avatar {
+        width: 60px;
+        height: 60px;
+        margin-right: 10px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .user-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+    }
+
+    .user-details {
+        flex-grow: 1;
+    }
+
+    .chat-login {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .chat-message {
+        font-size: 14px;
+        color: gray;
+    }
+
+    .chat-new-message {
+        font-size: 15px;
+        color: gray;
+        font-weight: bold;
+    }
+    .system-message{
+        color: rgb(77, 55, 187);
+    }
+    .own-message{
+        color: rgb(255, 0, 200);
+    }
+    .other-message{
+        color: rgb(0, 255, 42);
+    }
+    .time{
+        color: grey;
+    }
+</style>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    var login;
+    var chatInterval;
+
+    $(document).ready(function() {
+        console.log(login);
+        setInterval(makeChat, 100);
+
+        // Обробник натискання на кнопку "Надіслати"
+        $("#send-button").click(function() {
+            if (login !== null)
+                console.log(login);
+            else
+                console.log("clown");
+            sendMessage();
+        });
+
+        // Обробник натискання клавіші Enter
+        $("#message-input").keypress(function(event) {
+            if (event.which === 13) { // Код клавіші Enter
+                if ($.trim($("#message-input").val()) !== "") { // Перевірка на непорожнє поле введення
+                    console.log(login);
+                    sendMessage();
+                }
+            }
+        });
+
+        $(".chat-item").click(function(e) {
+            var target = e.target;
+            login = $(this).data("login");
+            if (!$(target).hasClass("user-image")) {
+                // Перевіряємо, чи вибраний чат вже є поточним
+                if (!$(this).hasClass("selected")) {
+                    // Зупиняємо попередній таймер оновлення чату, якщо він був запущений
+                    clearInterval(chatInterval);
+                    // Виконуємо запит до сервера та оновлюємо чат
+                    makeChat();
+                    // Запускаємо новий таймер оновлення чату
+                    chatInterval = setInterval(makeChat, 1000);
+                }
+
+                // Знімаємо позначку поточного чату з попереднього вибору
+                $(".chat-item.selected").removeClass("selected");
+
+                // Позначаємо вибраний чат як поточний
+                $(this).addClass("selected");
+            }
+        });
+
+        $(".user-image").click(function(e) {
+            e.preventDefault();
+            var link = $(this).closest(".avatar").find("a").attr("href");
+            if (link !== undefined) {
+                window.location.href = link;
+            }
+        });
+    });
+
+    function makeChat() {
+        if (login !== undefined) {
+            console.log("sldjfagh");
+            // Виконуємо запит до сервера
+            $.ajax({
+                url: "/Home/GetMessages",
+                method: "POST",
+                data: { interlocutorLogin: login },
+                success: function(response) {
+                    showMessages(response);
+                },
+                error: function(xhr, status, error) {
+                    // Обробка помилок
+                }
+            });
+        }
+    }
+
+    function sendMessage() {
+        var message = $("#message-input").val(); // Отримуємо значення з поля введення
+        console.log("test");
+        // Виконуємо AJAX-запит до сервера
+        $.ajax({
+            url: "/Home/SendMessage",
+            method: "POST",
+            data: { message: message, login: login }, // Додаємо логін до даних запиту
+            success: function(response) {
+                // Обробляємо успішну відповідь від сервера
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                // Обробка помилок
+                console.log(error);
+            }
+        });
+
+        // Очищаємо поле введення
+        $("#message-input").val("");
+    }
+
+    function showMessages(options) {
+        // Отримуємо посилання на елемент з класом chat-messages
+        var chatMessages = $(".chat-messages");
+
+        // Очищаємо вміст елементу chat-messages
+        chatMessages.empty();
+
+        // Перебираємо список повідомлень
+        for (var i = 0; i < options.length; i++) {
+            var message = options[i];
+            var messageClass = '';
+            var messageBlock;
+
+            if (message.isSystem) {
+                messageClass = 'system-message';
+                messageBlock = `
+                    <div class="${messageClass}">
+                        <div class="text">
+                            ${message.text}
+                        </div>
+                        <div class="time">
+                            ${message.time}
+                        </div>
+                    </div>
+                `;
+            } else if (message.isOwn) {
+                messageClass = 'own-message';
+                messageBlock = `
+                    <div class="${messageClass}">
+                        <div class="text">
+                            ${message.text}
+                        </div>
+                        <div class="time">
+                            ${message.time}
+                        </div>
+                    </div>
+                `;
+            } else {
+                messageClass = 'other-message';
+                messageBlock = `
+                    <div class="${messageClass}">
+                        <div class="text">
+                            ${message.text}
+                        </div>
+                        <div class="time">
+                            ${message.time}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Додаємо блок повідомлення до chat-messages
+            chatMessages.append(messageBlock);
+        }
+    }
+</script>
