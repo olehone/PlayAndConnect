@@ -29,8 +29,40 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\18e364fd-babd-4f30-bc76-17d559d89743_вища математика.jpg",
+      "PackagePath": "staticwebassets\\images\\18e364fd-babd-4f30-bc76-17d559d89743_вища математика.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\27621f15-7e3a-422f-be89-3fefb7c9ac58_най поки побуде авою.jpg",
+      "PackagePath": "staticwebassets\\images\\27621f15-7e3a-422f-be89-3fefb7c9ac58_най поки побуде авою.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\2bcee9a8-1bb4-46e4-bd38-14f929d8a8f4_аутизм.jpg",
+      "PackagePath": "staticwebassets\\images\\2bcee9a8-1bb4-46e4-bd38-14f929d8a8f4_аутизм.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\51b00d1c-0058-4fa1-a5e4-2cd87672eb27_photo_2022-10-13_03-32-17.jpg",
+      "PackagePath": "staticwebassets\\images\\51b00d1c-0058-4fa1-a5e4-2cd87672eb27_photo_2022-10-13_03-32-17.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\61f7fe30-36b1-4077-9d02-2856acffd6f3_новий рік.jpg",
+      "PackagePath": "staticwebassets\\images\\61f7fe30-36b1-4077-9d02-2856acffd6f3_новий рік.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\84a8e0c9-0070-4e2d-b2a8-9292eeb4edb9_най поки побуде авою.jpg",
+      "PackagePath": "staticwebassets\\images\\84a8e0c9-0070-4e2d-b2a8-9292eeb4edb9_най поки побуде авою.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\ba70bbc0-55ae-4f9f-b3c8-79c365b06453_завантаження.jfif",
+      "PackagePath": "staticwebassets\\images\\ba70bbc0-55ae-4f9f-b3c8-79c365b06453_завантаження.jfif"
+    },
+    {
       "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\default.jpg",
       "PackagePath": "staticwebassets\\images\\default.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\e2fd7aaf-6d34-458f-b1ed-ced50005920c_буквально я.jpg",
+      "PackagePath": "staticwebassets\\images\\e2fd7aaf-6d34-458f-b1ed-ced50005920c_буквально я.jpg"
     },
     {
       "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\ee04b719-7d62-4865-a8dd-df8765e468f4_буквально я.jpg",
@@ -39,6 +71,10 @@
     {
       "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\fd8aa470-ed99-42bc-a463-9d25bf17d7a7_завантаження.jfif",
       "PackagePath": "staticwebassets\\images\\fd8aa470-ed99-42bc-a463-9d25bf17d7a7_завантаження.jfif"
+    },
+    {
+      "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\fdd46d01-9f10-4fb4-8a89-5636109b4398_буквально я.jpg",
+      "PackagePath": "staticwebassets\\images\\fdd46d01-9f10-4fb4-8a89-5636109b4398_буквально я.jpg"
     },
     {
       "Id": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\js\\form.js",
