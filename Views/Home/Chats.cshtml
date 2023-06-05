@@ -7,7 +7,7 @@
     .chat-container {
         display: flex;
         min-height: 100%;
-        padding: 20px;
+        padding: 2%;
         box-sizing: border-box;
     }
 
@@ -30,7 +30,13 @@
         
         background-color: #f9f9f9;
     }
-
+    .chat-messages-changes {
+        flex-grow: 1;
+        overflow-y: scroll;
+        margin-bottom: 20px;
+        
+        background-color: #f9f9f9;
+    }
     .chat-input {
         display: flex;
         margin-top: 10px;
@@ -65,14 +71,15 @@
                     </div>
                     <div class="user-details">
                         <h3 class="chat-login">@chat.Login</h3>
-                        @if (@chat.IsNew)
-                        {
-                            <p class="chat-new-message">@chat.Message</p>
-                        }
-                        else
-                        {
-                            <p class="chat-message">@chat.Message</p>
-                        }
+
+                            @if (@chat.IsNew)
+                            {
+                                <p class="chat-new-message">@chat.Message</p>
+                            }
+                            else
+                            {
+                                <p class="chat-message">@chat.Message</p>
+                            }
                     </div>
                 </div>
             </div>
@@ -80,7 +87,7 @@
     </div>
 
     <div class="chat">
-        <p> Виберіть час</p>
+        
         <div class="chat-messages">
             <p>Виберіть чат</p>
         </div>
@@ -93,18 +100,22 @@
 </div>
 <style>
     body {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        
+        /*display: flex;*/
+        /*align-items: center;*/
+        /*justify-content: center;*/
         background: #dce8f1;
-        margin: 10% 0;
+        /*margin: 2% 0;*/
     }
-
+html{
+    overflow-x: hidden;
+    overflow-y: hidden;
+    max-height: 10px;
+}
 .container {
   position: relative;
-  max-width: 1200px;
-  min-height: 1000px;
+  max-width: 900px;
+  min-height: 500px;
   width: 100%;
   padding: 5% 1% 5% 1%; /* Відступи зверху й знизу - 5% */
   border-radius: 8px;
@@ -113,7 +124,7 @@
 
 .chat-container {
   display: flex;
-  height: calc(98% - 4px); /* Знижуємо висоту на 10% */
+  /*height: calc(98% - 4px); /* Знижуємо висоту на 10% */
 }
 
 .chat-list {
@@ -125,6 +136,7 @@
 .chat {
   width: 65%; /* Змінюємо ширину на 65% */
   overflow-y: auto;
+  max-width: 900px;
 }
 
     .chat-input {
@@ -176,14 +188,16 @@
     }
 
     .user-info {
+        margin-left: 5px;
         display: flex;
         align-items: center;
     }
 
     .avatar {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
         margin-right: 10px;
+        
         border-radius: 50%;
         overflow: hidden;
     }
@@ -205,27 +219,94 @@
     }
 
     .chat-message {
-        font-size: 14px;
+        font-size: 10px;
         color: gray;
     }
+.chat-messages {
+    max-height: 250px; /* Встановлюємо фіксовану висоту для контейнера повідомлень */
+    overflow-y: auto; /* Встановлюємо автоматичну прокрутку */
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    scrollbar-width: none; /* Приховуємо панель прокрутки */
+    -ms-overflow-style: none; /* Приховуємо панель прокрутки в IE та Edge */
+}
+
+/* Створюємо кастомні стилі для прокрутки */
+.chat-messages::-webkit-scrollbar {
+    width: 6px; /* Встановлюємо ширину прокрутки */
+    background-color: transparent; /* Задаємо прозорий фон */
+}
+
+/* Стилі для слайдера (повзунка) прокрутки */
+.chat-messages::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Задаємо кольорову заповненість повзунка */
+    border-radius: 3px; /* Задаємо радіус границі повзунка */
+}
+
+/* Стилі для прокрученої частини панелі прокрутки */
+.chat-messages::-webkit-scrollbar-track {
+    background-color: transparent; /* Задаємо прозорий фон прокрученої частини */
+}
+
+/* Стилі для прокрутки при наведенні курсора */
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5); /* Змінюємо кольорову заповненість повзунка при наведенні курсора */
+}
+
+
 
     .chat-new-message {
-        font-size: 15px;
-        color: gray;
+        font-size: 10px;
+        color: rgb(104, 104, 129);
         font-weight: bold;
     }
-    .system-message{
-        color: rgb(77, 55, 187);
+    .chat-new-message-change {
+        font-size: 10px;
+        color: rgb(104, 104, 129);
+        font-weight: bold;
     }
-    .own-message{
-        color: rgb(255, 0, 200);
-    }
-    .other-message{
-        color: rgb(0, 255, 42);
-    }
-    .time{
-        color: grey;
-    }
+.system-message {
+  background-color: #eaeaea;
+  /*color: #4d37bb; /* змініть належно до вашого смаку */
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  overflow-wrap: break-word;
+}
+
+.own-message {
+  background-color: #eaeaea;
+  /*color: #ff00c8; /* змініть належно до вашого смаку */
+  width: 40%;
+  margin-left: auto;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  overflow-wrap: break-word;
+}
+
+.other-message {
+  background-color: #eaeaea;
+  /*color: #00ff2a; /* змініть належно до вашого смаку */
+  width: 40%;
+  margin-right: auto;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  overflow-wrap: break-word;
+}
+
+.time {
+  color: grey;
+  text-align: right;
+  font-size: 0.8em; /* зменшіть належно до вашого смаку */
+}
+
+
+
 </style>
 
 
@@ -234,10 +315,11 @@
 <script>
     var login;
     var chatInterval;
+    var lastMessage;
 
     $(document).ready(function() {
         console.log(login);
-        setInterval(makeChat, 100);
+        //setInterval(makeChat, 4000);
 
         // Обробник натискання на кнопку "Надіслати"
         $("#send-button").click(function() {
@@ -267,9 +349,12 @@
                     // Зупиняємо попередній таймер оновлення чату, якщо він був запущений
                     clearInterval(chatInterval);
                     // Виконуємо запит до сервера та оновлюємо чат
-                    makeChat();
+                    makeChat()
+                    //function() {
+                    //    scrollToBottom();
+                    //});
                     // Запускаємо новий таймер оновлення чату
-                    chatInterval = setInterval(makeChat, 1000);
+                    chatInterval = setInterval(makeChat, 4000);
                 }
 
                 // Знімаємо позначку поточного чату з попереднього вибору
@@ -277,6 +362,9 @@
 
                 // Позначаємо вибраний чат як поточний
                 $(this).addClass("selected");
+
+                // Прокручуємо до низу
+                //scrollToBottom();
             }
         });
 
@@ -289,24 +377,32 @@
         });
     });
 
-    function makeChat() {
-        if (login !== undefined) {
-            console.log("sldjfagh");
-            // Виконуємо запит до сервера
-            $.ajax({
-                url: "/Home/GetMessages",
-                method: "POST",
-                data: { interlocutorLogin: login },
-                success: function(response) {
+function makeChat(callback) {
+    if (login !== undefined) {
+        console.log(lastMessage);
+        // Виконуємо запит до сервера
+        $.ajax({
+            url: "/Home/GetMessages",
+            method: "POST",
+            data: { interlocutorLogin: login, lastMessageText: lastMessage },
+            success: function(response) {
+                if (response === false) {
+                    // Логіка, коли останнє повідомлення співпадає
+                    console.log("Last message matches");
+                } else {
                     showMessages(response);
-                },
-                error: function(xhr, status, error) {
-                    // Обробка помилок
+                    scrollToBottom();
                 }
-            });
-        }
+                if (callback) {
+                    callback(); // Виклик функції зворотного виклику
+                }
+            },
+            error: function(xhr, status, error) {
+                // Обробка помилок
+            }
+        });
     }
-
+}
     function sendMessage() {
         var message = $("#message-input").val(); // Отримуємо значення з поля введення
         console.log("test");
@@ -314,10 +410,15 @@
         $.ajax({
             url: "/Home/SendMessage",
             method: "POST",
-            data: { message: message, login: login }, // Додаємо логін до даних запиту
+            data: { message: message, login: login}, // Додаємо логін до даних запиту
             success: function(response) {
                 // Обробляємо успішну відповідь від сервера
-                console.log(response);
+                //scrollToBottom();
+                lastMessage = null;
+                makeChat()//function() {
+                //    scrollToBottom();
+                //});
+                console.log("sctollToBottom");
             },
             error: function(xhr, status, error) {
                 // Обробка помилок
@@ -329,16 +430,31 @@
         $("#message-input").val("");
     }
 
+    function scrollToBottom() {
+        var chatMessages = $(".chat-messages");
+        chatMessages.scrollTop(chatMessages.prop("scrollHeight"));
+    }
+
     function showMessages(options) {
         // Отримуємо посилання на елемент з класом chat-messages
         var chatMessages = $(".chat-messages");
-
+        var selectedItem = document.querySelector('.chat-item.selected');
         // Очищаємо вміст елементу chat-messages
         chatMessages.empty();
 
         // Перебираємо список повідомлень
         for (var i = 0; i < options.length; i++) {
             var message = options[i];
+            if (i === options.length - 1) {
+                lastMessage = message.text;
+                // Зміна значення елемента з класом "chat-new-message"
+                var newMessageElement = selectedItem.querySelector('.chat-new-message');
+                if(message.text.length<33){
+                newMessageElement.textContent = message.text;}
+                else{
+                    newMessageElement.textContent = message.text.substr(0, 27)+"..";
+                }
+            }
             var messageClass = '';
             var messageBlock;
 
@@ -348,9 +464,6 @@
                     <div class="${messageClass}">
                         <div class="text">
                             ${message.text}
-                        </div>
-                        <div class="time">
-                            ${message.time}
                         </div>
                     </div>
                 `;
@@ -383,5 +496,6 @@
             // Додаємо блок повідомлення до chat-messages
             chatMessages.append(messageBlock);
         }
+        
     }
 </script>
