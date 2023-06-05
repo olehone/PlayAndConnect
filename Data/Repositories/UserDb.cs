@@ -12,20 +12,45 @@ namespace PlayAndConnect.Data.Interfaces
         {
             _db = db;
         }
-        public async Task<bool> Create(User entity)
+        public async Task<User?> GetUserByPassword(string login, string password)
         {
-            try
-            {
-                await _db.Users.AddAsync(entity);
-                await _db.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception! Message: {ex.Message}");
-                return false;
-            }
+            return await _db.Users.FirstOrDefaultAsync<User>(u => u.Login == login && u.PasswordHash == Hashing.HashPassword(password));
         }
+        public async Task<User?> GetUserByLogin(string? login)
+        {
+            if (login != null)
+                return await _db.Users.FirstOrDefaultAsync<User>(u => u.Login == login);
+            else
+                return null;
+        }
+        public async Task<User?> GetUserById(int? id)
+        {
+            if (id != null)
+                return await _db.Users.FirstOrDefaultAsync<User>(u => u.Id == id);
+            else
+                return null;
+        }
+        public async Task<User?> Create(string login, string password)
+        {
+            User? user = new User { Login = login, PasswordHash = Hashing.HashPassword(password) };
+            await _db.Users.AddAsync(user);
+            await _db.SaveChangesAsync();
+            return user;
+        }
+        public async Task<ICollection<User>?> GetUsersListWithGame(Game? game)
+        {
+            if(game!=null)
+            {
+                return await _db.Users.Where<User>(u => u.Games.Contains(game)).ToListAsync();
+            }
+            else return null;
+        }
+
+
+
+
+
+        /*
         public async Task<bool> Delete(int id)
         {
             var user = await _db.Users.FindAsync(id);

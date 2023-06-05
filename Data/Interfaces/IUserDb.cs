@@ -1,8 +1,13 @@
+using PlayAndConnect.Models;
 namespace PlayAndConnect.Data.Interfaces
 {
     public interface IUserDb : IBaseDb<PlayAndConnect.Models.User>
     {
-        //Task<bool> Create(string name, string password);
+        Task<User?> GetUserByPassword(string login, string password);
+        Task<User?> GetUserByLogin(string? login);
+        Task<User?> Create(string login, string password);
+        Task<User?> GetUserById(int? id);
+        Task<ICollection<User>?> GetUsersListWithGame(Game? game);
         /*Task<PlayAndConnect.Models.User?> GetByName(string name);
         Task<bool> Verify (string name, string password);
         ICollection<PlayAndConnect.Models.Game> GetGames(PlayAndConnect.Models.User user);
