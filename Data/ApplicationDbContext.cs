@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PlayAndConnect.Models;
-using PlayAndConnect.Data.Configurations;
 using Pomelo.EntityFrameworkCore.MySql;
 using System.Reflection.Metadata;
 
@@ -11,7 +10,7 @@ namespace PlayAndConnect.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
 
         }

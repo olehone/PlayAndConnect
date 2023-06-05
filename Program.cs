@@ -13,12 +13,13 @@ builder.Services.AddTransient<IUserDb, UserDb>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 32));
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(connectionString, serverVersion)
-            .LogTo(Console.WriteLine, LogLevel.Information) //це
-        .EnableSensitiveDataLogging()                       //потім 
-        .EnableDetailedErrors()                             //видалити
-        , ServiceLifetime.Singleton);                        //це може викликати проблеми з багатопотоковістю
+DbContextOptionsBuilder dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
+    .UseMySql(connectionString, serverVersion)
+    .LogTo(Console.WriteLine, LogLevel.Information) //обережно з цим
+    .EnableSensitiveDataLogging()                   //тільки для
+    .EnableDetailedErrors();                        //розробки
+builder.Services.AddDbContext<ApplicationDbContext>(options => options = dbOptions);
+
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
