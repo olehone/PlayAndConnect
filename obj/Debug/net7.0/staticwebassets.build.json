@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7DXGpxGM3DtouFuQuNPYY2yG5dR12UPIwg5UgExLrwQ=",
+  "Hash": "mfdwwk+Yg05BhrqTqI/EWUYtDEOTgQFvcogmecoAsh4=",
   "Source": "PlayAndConnect",
   "BasePath": "_content/PlayAndConnect",
   "Mode": "Default",
@@ -204,6 +204,23 @@
       "OriginalItemSpec": "wwwroot\\images\\27e8efa8-d061-44ce-8575-5fc75e37c4f9_photo_2023-06-06_17-52-31.jpg"
     },
     {
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\3ae9ddd6-a2da-4a53-b131-d249922b8824_unnamed.jpg",
+      "SourceId": "PlayAndConnect",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
+      "BasePath": "_content/PlayAndConnect",
+      "RelativePath": "images/3ae9ddd6-a2da-4a53-b131-d249922b8824_unnamed.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\3ae9ddd6-a2da-4a53-b131-d249922b8824_unnamed.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\40efaf05-e9dd-4609-9a1b-335c8796666e_буквально я.jpg",
       "SourceId": "PlayAndConnect",
       "SourceType": "Discovered",
@@ -289,6 +306,40 @@
       "OriginalItemSpec": "wwwroot\\images\\910b4331-e276-4c9e-9ca6-8d1354fa2015_unnamed.jpg"
     },
     {
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\97abdf4e-86b8-4f6e-a65d-9f17af44c230_най поки побуде авою.jpg",
+      "SourceId": "PlayAndConnect",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
+      "BasePath": "_content/PlayAndConnect",
+      "RelativePath": "images/97abdf4e-86b8-4f6e-a65d-9f17af44c230_най поки побуде авою.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\97abdf4e-86b8-4f6e-a65d-9f17af44c230_най поки побуде авою.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\a11ef5e4-c21d-4b40-9e29-b3c5bf1cb566_photo_2023-06-06_17-52-31.jpg",
+      "SourceId": "PlayAndConnect",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
+      "BasePath": "_content/PlayAndConnect",
+      "RelativePath": "images/a11ef5e4-c21d-4b40-9e29-b3c5bf1cb566_photo_2023-06-06_17-52-31.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\a11ef5e4-c21d-4b40-9e29-b3c5bf1cb566_photo_2023-06-06_17-52-31.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\d025c901-e4b9-43a4-90e2-a986e8446f91_буквально я.jpg",
       "SourceId": "PlayAndConnect",
       "SourceType": "Discovered",
@@ -355,6 +406,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\eb2d57ec-55dc-4c69-a7b2-97d7a07e3d08_photo_2023-06-06_17-52-31.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\f12918e6-4ebe-4698-aa19-8a97e94f8d0f_unnamed.jpg",
+      "SourceId": "PlayAndConnect",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
+      "BasePath": "_content/PlayAndConnect",
+      "RelativePath": "images/f12918e6-4ebe-4698-aa19-8a97e94f8d0f_unnamed.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\f12918e6-4ebe-4698-aa19-8a97e94f8d0f_unnamed.jpg"
     },
     {
       "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\f4ab898e-7fd1-4384-9367-a823f3de9f1d_photo_2022-10-13_03-32-17.jpg",

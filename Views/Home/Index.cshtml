@@ -1,6 +1,7 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";   
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +11,33 @@
     <title>Document</title>
 
 </head>
-<body>
-    Wellcome, @ViewBag.username
-    <p>@ViewBag.Error</p>
-    <p>@ViewBag.SysMessage</p>
+<body>    
+        <h3 class="welcome__title">Play&Connect</h3>
+        <h6 class="welcome__details" id="welcome-text">Welcome, @ViewBag.Username, have a nice day!</h6>
+        </div>
+    </div>
 </body>
+<style>
+    
+
+.welcome__block{
+  width:500px;
+  margin-top: -60px;
+
+}
+
+
+.welcome_details{
+  font-size: 12px;
+  color:#97b1cf;
+
+}
+
+.welcome__title{
+  color: #385a7b;
+  font-size: 25px;
+}
+
+</style>
 </html>
+

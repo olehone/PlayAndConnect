@@ -14,7 +14,6 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'><link rel="stylesheet" href="chat.css">
     
     <link rel="stylesheet" href="../base.css" />
-    <link rel="stylesheet" href="faq.css" />
     <link rel="stylesheet" href="phone.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   </head>
@@ -72,8 +71,8 @@
   </body>
 </html>
 <style>
-    body{
-}
+
+
 h1{
   font-size: 60px
 }
@@ -84,6 +83,7 @@ h1{
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
+  margin-top: 20px;
  }
 
  .accordion li{
@@ -103,13 +103,14 @@ h1{
   font-size: 18px;
   font-weight: 500;
   cursor: pointer;
+  margin-top:6px;
 }
 
 label::before{
   content:'+';
   margin-right: 25px;
   margin-left: 25px;
-  margin-top: -9px;
+  margin-top: 0px;
   
   font-size: 70px;
   font-weight: bold;
@@ -140,8 +141,8 @@ label::before{
   content: '-';
   font-size: 70px;
   font-weight: bold;
-  margin-right: 36px;
-  margin-left: 36px;
+  margin-right: 25px;
+  margin-left: 25px;
 }
 
 .open:checked + label + .content{
@@ -155,7 +156,7 @@ label::before{
 }
 
 .faq{
-  margin-top: 60px;
+  margin-top: 105px;
   text-align: center;
   font-size: 50px;
   font-weight: bold;
@@ -163,6 +164,8 @@ label::before{
 }
 
 .answer{
+  font-size:initial;
   margin-top: 15px;
+  color: #7e9fc4;
 }
 </style>

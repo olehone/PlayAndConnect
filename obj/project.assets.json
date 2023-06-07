@@ -1597,11 +1597,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\PlayAndConnect.csproj",
+      "projectUniqueName": "c:\\Users\\Олег\\Desktop\\PlayAndConnect\\PlayAndConnect.csproj",
       "projectName": "PlayAndConnect",
-      "projectPath": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\PlayAndConnect.csproj",
+      "projectPath": "c:\\Users\\Олег\\Desktop\\PlayAndConnect\\PlayAndConnect.csproj",
       "packagesPath": "C:\\Users\\Олег\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\obj\\",
+      "outputPath": "c:\\Users\\Олег\\Desktop\\PlayAndConnect\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Олег\\AppData\\Roaming\\NuGet\\NuGet.Config",

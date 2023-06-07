@@ -12,6 +12,250 @@
 
 </head>
 <body>
-    There must be a main page. For new
+    <div class="welcome__main">
+        <div class="welcome__article">
+          <div class="welcome__block">        
+            <h1 class="welcome__title">Play&Connect</h1>
+            <div class="welcome_details">
+              <h3 class="welcome__first-p" id="welcome-text">Welcome to the ultimate gaming matchmaking platform! 
+              Level up your social life and conquer new connections. </h3>
+            <h3 class="welcome__second-p" id="welcome-text">Join our vibrant community of gamer singles and discover your player two today!"</h3>
+          
+            </div>
+            </div>
+            <a href="../Home/Signup" class="welcome__btn">SIGN UP</a>
+        </div>
+        <div id="slider">
+          <input type="radio" name="slider" id="slide1" checked>
+          <input type="radio" name="slider" id="slide2">
+          <input type="radio" name="slider" id="slide3">
+          <input type="radio" name="slider" id="slide4">
+          <div id="slides">
+             <div id="overflow">
+                <div class="inner">
+                   <div class="slide slide_1">
+                      <div class="slide-content">
+                         <img src="~/images/index2.jpg" class="slide-pic">
+                      </div>
+                   </div>
+                   <div class="slide slide_2">
+                      <div class="slide-content">
+                        <img src="~/images/index6.jpg" class="slide-pic">
+                      </div>
+                   </div>
+                   <div class="slide slide_3">
+                      <div class="slide-content">
+                        <img src="~/images/index2.jpg" class="slide-pic">
+                      </div>
+                   </div>
+                   <div class="slide slide_4">
+                      <div class="slide-content">
+                        <img src="~/images/index4.jpeg" class="slide-pic">
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div id="controls">
+             <label for="slide1"></label>
+             <label for="slide2"></label>
+             <label for="slide3"></label>
+             <label for="slide4"></label>
+          </div>
+          <div id="bullets">
+             <label for="slide1"></label>
+             <label for="slide2"></label>
+             <label for="slide3"></label>
+             <label for="slide4"></label>
+          </div>
+       </div>
+       <div class="welcome__arrow"></div>
+      </div>
 </body>
+<style>
+    .pb-3{
+      min-width: 400px;
+    }
+.welcome__btn{
+  margin-top:25px;
+  display: inline-block;
+  padding: 15px 50px;
+  background-color: #1c3f60;
+  color: white;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.welcome__main{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  width:1200px;
+  padding:50px;
+  margin-top:50px;
+}
+
+.welcome__block{
+  width:500px;
+  margin-top: -60px;
+
+}
+
+
+.welcome_details{
+  margin-top:-19px;
+  color:#97b1cf;
+
+}
+
+.welcome__title{
+  color: #385a7b;
+  font-size: 60px;
+}
+
+#username{
+  margin-top: -90px;
+}
+
+.welcome__arrow {
+	width: 0;
+	height: 0;
+  margin-left:30px;
+	border-top: 35px solid transparent;
+	border-left: 30px solid #385a7b;
+	border-bottom: 35px solid transparent;
+}
+/* slide */
+#slider {
+  margin: 0 auto;
+  width: 700px;
+  max-width: 100%;
+  text-align: center;
+}
+#slider input[type=radio] {
+  display: none;
+}
+#slider label {
+  cursor:pointer;
+  text-decoration: none;
+}
+
+#overflow {
+  width: 100%;
+  overflow: hidden;
+}
+#slide1:checked ~ #slides .inner {
+  margin-left: 0;
+}
+#slide2:checked ~ #slides .inner {
+  margin-left: -100%;
+}
+#slide3:checked ~ #slides .inner {
+  margin-left: -200%;
+}
+#slide4:checked ~ #slides .inner {
+  margin-left: -300%;
+}
+#slides .inner {
+  transition: margin-left 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000);
+  width: 400%;
+  line-height: 0;
+  height: 300px;
+
+}
+#slides .slide {
+  width: 25%;
+  float:left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150%;
+  color: #fff;
+}
+#slides .slide_1 {
+  background: #00171F;
+}
+#slides .slide_2 {
+  background: #003459;
+}
+#slides .slide_3 {
+  background: #007EA7;
+}
+#slides .slide_4 {
+  background: #00A8E8;
+}
+#controls {
+  margin: -180px 0 0 0;
+  width: 100%;
+  height: 50px;
+  z-index: 3;
+  position: relative;
+}
+#controls label {
+  transition: opacity 0.2s ease-out;
+  display: none;
+  width: 50px;
+  height: 50px;
+  opacity: .4;
+}
+#controls label:hover {
+  opacity: 1;
+}
+#slide1:checked ~ #controls label:nth-child(2),
+#slide2:checked ~ #controls label:nth-child(3),
+#slide3:checked ~ #controls label:nth-child(4),
+#slide4:checked ~ #controls label:nth-child(1) {
+  background: url(https://image.flaticon.com/icons/svg/130/130884.svg) no-repeat;
+  float:right;
+  margin: 0 -50px 0 0;
+  display: block;
+}
+#slide1:checked ~ #controls label:nth-last-child(2),
+#slide2:checked ~ #controls label:nth-last-child(3),
+#slide3:checked ~ #controls label:nth-last-child(4),
+#slide4:checked ~ #controls label:nth-last-child(1) {
+  background: url(https://image.flaticon.com/icons/svg/130/130882.svg) no-repeat;
+  float:left;
+  margin: 0 0 0 -50px;
+  display: block;
+}
+#bullets {
+  margin: 150px 0 0;
+  text-align: center;
+}
+#bullets label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius:100%;
+  background: #bdd2e9;
+  margin: 0 2px;
+}
+#slide1:checked ~ #bullets label:nth-child(1),
+#slide2:checked ~ #bullets label:nth-child(2),
+#slide3:checked ~ #bullets label:nth-child(3),
+#slide4:checked ~ #bullets label:nth-child(4) {
+  background: #444;
+}
+
+.welcome__article{
+    margin-right:50px;
+}
+.container{
+  min-width: 450px;
+  max-width: 500px;
+}
+.slide-content{
+  
+}
+  .slide-pic{
+   width: 490px;
+  height: 450px;
+  object-fit: cover;
+}
+  }
+</style>
 </html>
