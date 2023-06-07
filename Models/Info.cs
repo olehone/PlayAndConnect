@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using PlayAndConnect.Models;
-public class UserInfo
+namespace PlayAndConnect.Models;
+public class Info
 {
     public int Id { get; set; }
     [Range(7, 100)]

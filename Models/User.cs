@@ -9,7 +9,7 @@ namespace PlayAndConnect.Models
         public int Id{get;set;}
         public string Login { get; set; }
         public string PasswordHash { get; set; }
-        public UserInfo Info {get; set;}
+        public Info Info {get; set;}
 
         public ICollection<Game> Games {get; set;} 
         public ICollection<Like> Likes { get; set; }

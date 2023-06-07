@@ -1,0 +1,168 @@
+@{
+    ViewData["Title"] = "FAQ";
+    Layout = ViewBag.Layout;
+}
+<h1>@ViewData["FAQ"]</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'><link rel="stylesheet" href="chat.css">
+    
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="faq.css" />
+    <link rel="stylesheet" href="phone.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body>
+    <script src="phone.js"></script>
+
+    <h1 class="faq">FAQ</h1>
+    <div class="accordion">
+  <li>
+    <input class="open" type="checkbox" name="accordion" id="first">
+    <label for="first">Can I connect with gamers from different regions or countries?</label>
+    <div class="content">
+      <p class="answer">Absolutely! Play&Connect allows you to connect with gamers from all around the world based on your preferences.</p>
+    </div>
+  </li>
+  <li>
+    <input class="open" type="checkbox" name="accordion" id="second">
+    <label for="second">Is Play&Connect free to use?</label>
+    <div class="content">
+      <p class="answer">Play&Connect offers basic features for free, but there may be premium features or subscription plans available for enhanced gaming experiences.</p>
+    </div>
+  </li>
+  <li>
+    <input class="open" type="checkbox" name="accordion" id="third">
+    <label for="third">What is Play&Connect?</label>
+    <div class="content">
+      <p class="answer">Play&Connect is a platform for gamers that helps them find friends and gaming partners, share experiences, and join gaming communities.</p>
+    </div>
+  </li>
+  <li>
+    <input class="open" type="checkbox" name="accordion" id="four">
+    <label for="four">Does Play&Connect offer chat or communication features?</label>
+    <div class="content">
+      <p class="answer">Yes, Play&Connect provides chat and communication features within the platform, allowing you to communicate and coordinate with your gaming friends.</p>
+    </div>
+  </li>
+  <li>
+    <input class="open" type="checkbox" name="accordion" id="five">
+    <label for="five">Can I customize my profile on Play&Connect?</label>
+    <div class="content">
+      <p class="answer">Yes, Play&Connect provides profile customization options where you can add information about yourself, showcase your gaming interests, and personalize your profile picture.</p>
+    </div>
+  </li>
+  <li>
+    <input class="open" type="checkbox" name="accordion" id="six">
+    <label for="six">Are there any restrictions on the number of friends I can have on Play&Connect?</label>
+    <div class="content">
+      <p class="answer">There are no specific restrictions on the number of friends you can have on Play&Connect. You can connect with as many people as you'd like.</p>
+    </div>
+  </li>
+</div>
+
+
+
+  </body>
+</html>
+<style>
+    body{
+}
+h1{
+  font-size: 60px
+}
+ .accordion{
+  width: 90%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+ }
+
+ .accordion li{
+  list-style: none;
+  width: 93%;
+  margin: 10px;
+  color: #385a7b;
+  border-radius: 40px;
+  background: #7e9fc4;
+ }
+
+.accordion li label{
+  display:flex;
+  height:80px;
+  align-items: center;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+label::before{
+  content:'+';
+  margin-right: 25px;
+  margin-left: 25px;
+  margin-top: -9px;
+  
+  font-size: 70px;
+  font-weight: bold;
+
+}
+
+.open{
+  display:none;
+}
+.accordion .content{
+  color: #7e9fc4;
+  display:flex;
+  align-items: center;
+  background: #ffffff;
+
+  padding:0 10px;
+  line-height: 26px;
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.5s;
+  border-radius: 0 0 40px 40px;
+  box-shadow: 6px 6px 10px -1px rgba(0,0,0, 0.15);
+
+
+}
+
+.content::before{
+  content: '-';
+  font-size: 70px;
+  font-weight: bold;
+  margin-right: 36px;
+  margin-left: 36px;
+}
+
+.open:checked + label + .content{
+  max-height: 400px;
+  padding: 10px 10px 20px;
+}
+
+.open:not(:checked) + label + .content{
+  max-height: 0px;
+  padding: 0;
+}
+
+.faq{
+  margin-top: 60px;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  color: #385a7b;
+}
+
+.answer{
+  margin-top: 15px;
+}
+</style>

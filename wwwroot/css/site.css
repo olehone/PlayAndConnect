@@ -49,6 +49,35 @@ body {
   justify-content: center; 
   background: #dce8f1;
 }
+textarea {
+  width: 100%; /* Займати всю доступну ширину */
+  height: 150px; /* Встановити висоту textarea */
+  padding: 10px; /* Внутрішній відступ */
+  font-size: 16px; /* Розмір шрифту */
+  border: 1px solid #ccc; /* Стиль межі */
+  border-radius: 5px; /* Закруглені кути межі */
+  resize: vertical; /* Дозволити зміну розміру по вертикалі */
+}
+
+  
+*::-webkit-scrollbar {
+  width: 6px; /* Встановлюємо ширину прокрутки */
+  background-color: transparent; /* Задаємо прозорий фон */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3); /* Задаємо кольорову заповненість повзунка */
+  border-radius: 3px; /* Задаємо радіус границі повзунка */
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent; /* Задаємо прозорий фон прокрученої частини */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5); /* Змінюємо кольорову заповненість повзунка при наведенні курсора */
+}
+
 .container {
   position: relative;
   max-width: 370px;
@@ -56,6 +85,10 @@ body {
   padding: 25px;
   border-radius: 8px;
   background-color: #fff;
+  overflow-y: scroll;
+}
+.pb-3{
+  overflow-x: hidden;
 }
 .container header {
   font-size: 22px;
@@ -157,7 +190,11 @@ form .input-field {
   background-color: #ddd;
   color: black;
 }
-
+.topnav.logo {
+  background-color: #ddd;
+  color: black;
+  
+}
 .topnav a.active {
   background-color: #002c4b;
   color: #afc1d0;
@@ -212,7 +249,6 @@ form .input-field {
   color: black;
 }
 .username {
-  font-size: 0.8rem;
   color: rgba(162, 162, 162);
 }
 p {
@@ -256,4 +292,57 @@ a {
   bottom: 0;
   width: 30%;
   background-color: blue;
+}
+/* Створюємо контейнер для кастомізованого селектора */
+.custom-select-container {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+}
+
+/* Стилі для оригінального селектора, який буде прихований */
+.custom-select-container select {
+  display: none;
+}
+
+/* Створюємо стилізовану псевдоелемент під селектором */
+.custom-select-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Створюємо стилізовану псевдоелемент стрілки вниз */
+.custom-select-container::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 4px);
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #aaa transparent transparent;
+  pointer-events: none;
+}
+
+/* Створюємо стилізований блок для вибраного елемента */
+.custom-select-container .selected-option {
+  display: block;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+}
+textarea:focus {
+  outline: none;
+  border-color: #ccc;
+  box-shadow: none;
 }

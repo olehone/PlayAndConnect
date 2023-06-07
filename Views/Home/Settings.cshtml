@@ -1,3 +1,6 @@
+@{
+    ViewData["Title"] = "Settings";
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,31 +9,40 @@
   <link rel="stylesheet" href="~/wwwroot/css/style.css">
 </head>
 <body>
-  <div class="container">
+  <div class="account-container">
     <h2>Account info</h2>
     <form method="POST" enctype="multipart/form-data">
       <p class="error">
         @ViewBag.Error
       </p>
-<div class="input-field">
-    <input type="text" name="name" placeholder="Enter your name" class="name" required value="@ViewBag.Name" />
-</div>
-<div class="input-field">
-    <input type="number" name="age" placeholder="Enter your age" class="age" required max="100" min="7" value="@ViewBag.Age" />
-</div>
-<div class="input-field">
-    <textarea name="description" placeholder="Description like 'Hello, I'm a gamer' or something" class="name" required>@ViewBag.Description</textarea>
-</div>
-<div class="input-field">
-    <textarea name="contact" placeholder="Information for the match. Users with whom you have a shared match will see this" class="contact" required>@ViewBag.Contact</textarea>
+      <div class="field">
+  <div class="avatar-container">
+    <img id="avatarPreview" class="field user-image" src="@ViewBag.imagePath">
+    <label for="fileInput" class="custom-file-button">
+      <i class="fas fa-plus"></i>
+    </label>
+  </div>
+  <input class="image-file" type="file" name="imageFile" id="fileInput" accept="image/*" />
 </div>
 
-      <div class="input-field">
-        <input type="file" name="imageFile" accept="image/*" />
-      </div>
-      <div>
-        <input type="text" id="gameNameInput" oninput="getGameOptions()" />
-        <select id="gameOptions" size="5" name="selectGame"></select>
+<div class="field input-field">
+    <input type="text" name="name" placeholder="Enter your name" class="name" required value="@ViewBag.Name" autocomplete="off"/>
+    </div>
+<div class="field input-field">
+    <input type="number" name="age" placeholder="Enter your age" class="age" required max="100" min="7" value="@ViewBag.Age" autocomplete="off"/>
+</div>
+<div class="field input-many-field">
+    <textarea name="description" placeholder="Description like 'Hello, I'm a gamer' or something" class="name" required>@ViewBag.Description</textarea>
+</div>
+<div class="field input-many-field">
+    <textarea name="contact" placeholder="Information for users with whom you have mutual likes" class="contact" required>@ViewBag.Contact</textarea>
+</div>
+
+      <div class="field input-field">
+        <input placeholder="Active game" type="text" id="gameNameInput" autocomplete="off" oninput="getGameOptions()" />
+        </div>
+      <div class = "select">
+        <select class="games" id="gameOptions" size="5" name="selectGame"></select>
       </div>
       <div class="input-field button">
         <input type="submit" name="submit" value="Submit Now" />
@@ -41,3 +53,175 @@
   <script src="~/js/selectGames.js"></script>
 </body>
 </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+<style>
+  .custom-file-button {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-file-button:hover {
+  background-color: #45a049;
+}
+
+.custom-file-button i {
+  font-size: 24px;
+}
+
+  .custom-file-input {
+  
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.custom-file-input:hover {
+  background-color: #45a049;
+}
+
+  .custom-select-container .selected-option {
+  border: none;
+}.custom-select-container .selected-option {
+  border: none;
+}
+.select {
+  border-color: none;
+  position: relative;
+}
+.image-file{
+  display: none;
+}
+option {
+  background-color: rgb(244, 244, 247);
+  height: 55px;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+
+  margin-bottom: 8px;
+}
+option:hover {
+  background-color: rgb(233, 233, 236);
+}
+.games {
+  border: none;
+  width: 100%;
+  max-height: 120px;
+  overflow-y: auto;
+}
+.games:focus {
+  outline: none;
+}
+  .select{
+    border-color: none;
+  }
+.user-image {
+  width: 295px;
+  height: 295px;
+  border: 4px solid #294f79;
+  margin-bottom: auto;
+  padding: 5px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+body{
+  padding: 200px;
+}
+.container{
+  min-width: 400px;
+  }
+  .account-container{
+
+  overflow-x: hidden;
+  max-height: 400 px;
+  position: relative;
+  max-width: 370px;
+  width: 100%;
+  padding: 25px;
+  border-radius: 8px;
+  background-color: #fff;
+  }
+  .flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.selected-option {
+  background-color: blue;
+  color: white;
+}
+
+.select-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  border: 2px solid black;
+  border-radius: 8px;
+} 
+.field {
+  position: relative;
+}
+
+.avatar-container {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-file-button {
+  position: absolute;
+  bottom: 43px;
+  right: 43px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #4d6580;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.custom-file-button:hover {
+  background-color: #445b75;
+}
+
+.custom-file-button i {
+  font-size: 14px;
+}
+
+</style>
+<script>
+  document.querySelector('input[name="imageFile"]').addEventListener('change', function(event) {
+    var reader = new FileReader();
+    reader.onload = function() {
+      var preview = document.getElementById('avatarPreview');
+      preview.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  });
+</script>

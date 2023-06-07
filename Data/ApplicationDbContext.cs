@@ -15,7 +15,7 @@ namespace PlayAndConnect.Data
 
         }
         public DbSet<User> Users => Set<User>();
-        public DbSet<UserInfo> Infos => Set<UserInfo>();
+        public DbSet<Info> Infos => Set<Info>();
         public DbSet<Genre> Genres => Set<Genre>();
         public DbSet<Game> Games => Set<Game>();
         public DbSet<Like> Likes => Set<Like>();
@@ -27,13 +27,13 @@ namespace PlayAndConnect.Data
             //User
             modelBuilder.Entity<User>().Property(p => p.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<User>().Property(p => p.Login).HasMaxLength(30).IsRequired();
-            modelBuilder.Entity<User>().HasOne(u => u.Info).WithOne(i => i.User).HasForeignKey<UserInfo>(x => x.UserId).HasPrincipalKey<User>(u => u.Id);
+            modelBuilder.Entity<User>().HasOne(u => u.Info).WithOne(i => i.User).HasForeignKey<Info>(x => x.UserId).HasPrincipalKey<User>(u => u.Id);
             modelBuilder.Entity<User>().HasMany(u => u.Games).WithMany(g => g.Users);
             modelBuilder.Entity<User>().HasMany(u => u.Chats).WithMany(g => g.Users);
 
             //UserInfo
-            modelBuilder.Entity<UserInfo>().Property(p => p.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<UserInfo>().Property(p => p.ImagePath).IsRequired(false);
+            modelBuilder.Entity<Info>().Property(p => p.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Info>().Property(p => p.ImagePath).IsRequired(false);
 
             //Game
             modelBuilder.Entity<Game>().Property(g => g.Id).ValueGeneratedOnAdd();

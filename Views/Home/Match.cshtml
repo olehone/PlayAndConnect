@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Match";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -7,24 +7,84 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
 </head>
 <body>
-    Ur metch: @ViewBag.username
-    And login: @ViewBag.Login
-    Age: @ViewBag.Age
-    <div>
-
-        <form method="POST">
-            <input type="hidden" name="like" value="true">
-            <button type="submit">Подобається</button>
-        </form>
+        <img class="user-image" src="@ViewBag.imagePath">
+    <div class="user-info">
+        <div class="user-details">
+            <p>Login: @ViewBag.login</p>
+            <p>Username: @ViewBag.username</p>
+            <p>Age: @ViewBag.age</p>
+            <p>Description : @ViewBag.description</p>
+            <p>@ViewBag.contact</p>
+            <p>Play game: @ViewBag.game</p>
+        </div>
     </div>
     <div>
-        <form method="POST">
-            <input type="hidden" name="like" value="false">
-            <button type="submit">Не подобається</button>
-        </form>
+        <div class="like-buttons">
+            <form method="POST">
+                <input type="hidden" name="like" value="false">
+                <button type="submit" class="unlike-button">
+                    <i class="fa fa-heart-o"></i>
+                </button>
+            </form>
+            <form method="POST">
+                <input type="hidden" name="like" value="true">
+                <button type="submit" class="like-button">
+                    <i class="fa fa-heart"></i>
+                </button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
+<style>
+.like-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.like-button, .unlike-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #e74c3c;
+  margin-right: 10px;
+}
+
+.unlike-button {
+  color: #95a5a6;
+}
+.container {
+  min-height: 500px;
+  display: flex;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-image {
+  width: 320px;
+  height: 320 px;
+  padding: 5px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+p{
+  overflow-wrap: break-word;
+}
+.user-details {
+  width: 100%;
+  height: 40%;
+  font-size: 16px;
+word-break: break-all;
+}
+
+    </style>

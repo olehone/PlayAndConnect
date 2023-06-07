@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<style>
+    .topnav {
+  display: flex;
+  align-items: center;
+  background-color: #385a7b;
+  padding: 13px;
+}
+
+.avatar {
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+}
+
+.logo {
+  color: #fff;
+  font: bold;
+  font-size: 25px;
+  margin-right: auto;
+
+  padding-top: 10px;
+}
+</style>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PlayAndConnect</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PlayAndConnect.styles.css" asp-append-version="true" />
+    <div class="topnav">
+          <img class="avatar" src="~/images/logo.png" alt="User Avatar">
+  <span class="logo">Play and Connect</span>
+        <a href="../Home/Faq">Faq</a>
+        <a href="../Home/Privacy">Privacy</a>
+        <a href="../Home/Signup">Sign up</a>
+        <a href="../Home/Login">Log in</a>
+        <a href="..">Home</a>
+      </div>
+</head>
+<body>
+    </div>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

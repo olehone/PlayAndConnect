@@ -1,4 +1,7 @@
-
+@{
+    ViewData["Title"] = "Log In";
+    Layout = "_LayoutForNew";
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +15,7 @@
     <form method="POST">
         <p class="error">
         @ViewBag.Error
+        @ViewBag.Message
         </p>
       <div class="field username-field">
         <div class="input-field">
@@ -39,6 +43,7 @@
         <input type="submit" name="submit" value="Submit Now" />
       </div>
     </form>
+    <a href="../Home/Signup">Don`t have account? Sign up</a>
   </div>
   <script src="~/wwwroot/form.js"></script>
   <script src="~/wwwroot/script.js"></script>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "V7o28ZNW2CDPaGFYY/sgJ6jJsH1XuDhVsO788z/1Q9E=",
+  "Hash": "7DXGpxGM3DtouFuQuNPYY2yG5dR12UPIwg5UgExLrwQ=",
   "Source": "PlayAndConnect",
   "BasePath": "_content/PlayAndConnect",
   "Mode": "Default",
@@ -153,12 +153,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\18e364fd-babd-4f30-bc76-17d559d89743_вища математика.jpg",
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\04e98869-5f47-4567-9f2f-4bbd32157bad_photo_2023-04-06_19-20-39jpg",
       "SourceId": "PlayAndConnect",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
       "BasePath": "_content/PlayAndConnect",
-      "RelativePath": "images/18e364fd-babd-4f30-bc76-17d559d89743_вища математика.jpg",
+      "RelativePath": "images/04e98869-5f47-4567-9f2f-4bbd32157bad_photo_2023-04-06_19-20-39jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -167,15 +167,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\18e364fd-babd-4f30-bc76-17d559d89743_вища математика.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\04e98869-5f47-4567-9f2f-4bbd32157bad_photo_2023-04-06_19-20-39jpg"
     },
     {
-      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\27621f15-7e3a-422f-be89-3fefb7c9ac58_най поки побуде авою.jpg",
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\05e52893-a83d-4eba-9a6e-4bb921c6aaf0_photo_2023-06-06_17-52-31.jpg",
       "SourceId": "PlayAndConnect",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
       "BasePath": "_content/PlayAndConnect",
-      "RelativePath": "images/27621f15-7e3a-422f-be89-3fefb7c9ac58_най поки побуде авою.jpg",
+      "RelativePath": "images/05e52893-a83d-4eba-9a6e-4bb921c6aaf0_photo_2023-06-06_17-52-31.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -184,15 +184,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\27621f15-7e3a-422f-be89-3fefb7c9ac58_най поки побуде авою.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\05e52893-a83d-4eba-9a6e-4bb921c6aaf0_photo_2023-06-06_17-52-31.jpg"
     },
     {
-      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\2bcee9a8-1bb4-46e4-bd38-14f929d8a8f4_аутизм.jpg",
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\27e8efa8-d061-44ce-8575-5fc75e37c4f9_photo_2023-06-06_17-52-31.jpg",
       "SourceId": "PlayAndConnect",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
       "BasePath": "_content/PlayAndConnect",
-      "RelativePath": "images/2bcee9a8-1bb4-46e4-bd38-14f929d8a8f4_аутизм.jpg",
+      "RelativePath": "images/27e8efa8-d061-44ce-8575-5fc75e37c4f9_photo_2023-06-06_17-52-31.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -201,15 +201,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\2bcee9a8-1bb4-46e4-bd38-14f929d8a8f4_аутизм.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\27e8efa8-d061-44ce-8575-5fc75e37c4f9_photo_2023-06-06_17-52-31.jpg"
     },
     {
-      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\51b00d1c-0058-4fa1-a5e4-2cd87672eb27_photo_2022-10-13_03-32-17.jpg",
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\40efaf05-e9dd-4609-9a1b-335c8796666e_буквально я.jpg",
       "SourceId": "PlayAndConnect",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
       "BasePath": "_content/PlayAndConnect",
-      "RelativePath": "images/51b00d1c-0058-4fa1-a5e4-2cd87672eb27_photo_2022-10-13_03-32-17.jpg",
+      "RelativePath": "images/40efaf05-e9dd-4609-9a1b-335c8796666e_буквально я.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -218,15 +218,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\51b00d1c-0058-4fa1-a5e4-2cd87672eb27_photo_2022-10-13_03-32-17.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\40efaf05-e9dd-4609-9a1b-335c8796666e_буквально я.jpg"
     },
     {
-      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\61f7fe30-36b1-4077-9d02-2856acffd6f3_новий рік.jpg",
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\69dd5f43-6883-49c1-b495-52b20739c8c8_photo_2023-06-06_17-52-31.jpg",
       "SourceId": "PlayAndConnect",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
       "BasePath": "_content/PlayAndConnect",
-      "RelativePath": "images/61f7fe30-36b1-4077-9d02-2856acffd6f3_новий рік.jpg",
+      "RelativePath": "images/69dd5f43-6883-49c1-b495-52b20739c8c8_photo_2023-06-06_17-52-31.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -235,15 +235,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\61f7fe30-36b1-4077-9d02-2856acffd6f3_новий рік.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\69dd5f43-6883-49c1-b495-52b20739c8c8_photo_2023-06-06_17-52-31.jpg"
     },
     {
-      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\84a8e0c9-0070-4e2d-b2a8-9292eeb4edb9_най поки побуде авою.jpg",
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\6eecf1a0-75cf-47ad-81f4-fb0d0a8a84c9_photo_2023-06-06_17-52-31.jpg",
       "SourceId": "PlayAndConnect",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
       "BasePath": "_content/PlayAndConnect",
-      "RelativePath": "images/84a8e0c9-0070-4e2d-b2a8-9292eeb4edb9_най поки побуде авою.jpg",
+      "RelativePath": "images/6eecf1a0-75cf-47ad-81f4-fb0d0a8a84c9_photo_2023-06-06_17-52-31.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -252,15 +252,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\84a8e0c9-0070-4e2d-b2a8-9292eeb4edb9_най поки побуде авою.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\6eecf1a0-75cf-47ad-81f4-fb0d0a8a84c9_photo_2023-06-06_17-52-31.jpg"
     },
     {
-      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\ba70bbc0-55ae-4f9f-b3c8-79c365b06453_завантаження.jfif",
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\7321e23f-2f55-4184-9bd7-918e800a8fd8_вища математика.jpg",
       "SourceId": "PlayAndConnect",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
       "BasePath": "_content/PlayAndConnect",
-      "RelativePath": "images/ba70bbc0-55ae-4f9f-b3c8-79c365b06453_завантаження.jfif",
+      "RelativePath": "images/7321e23f-2f55-4184-9bd7-918e800a8fd8_вища математика.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -269,7 +269,58 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\ba70bbc0-55ae-4f9f-b3c8-79c365b06453_завантаження.jfif"
+      "OriginalItemSpec": "wwwroot\\images\\7321e23f-2f55-4184-9bd7-918e800a8fd8_вища математика.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\910b4331-e276-4c9e-9ca6-8d1354fa2015_unnamed.jpg",
+      "SourceId": "PlayAndConnect",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
+      "BasePath": "_content/PlayAndConnect",
+      "RelativePath": "images/910b4331-e276-4c9e-9ca6-8d1354fa2015_unnamed.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\910b4331-e276-4c9e-9ca6-8d1354fa2015_unnamed.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\d025c901-e4b9-43a4-90e2-a986e8446f91_буквально я.jpg",
+      "SourceId": "PlayAndConnect",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
+      "BasePath": "_content/PlayAndConnect",
+      "RelativePath": "images/d025c901-e4b9-43a4-90e2-a986e8446f91_буквально я.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\d025c901-e4b9-43a4-90e2-a986e8446f91_буквально я.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\d6449f1d-b6f8-4e9b-9096-39d7ac7792f5_завантаження.jfif",
+      "SourceId": "PlayAndConnect",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
+      "BasePath": "_content/PlayAndConnect",
+      "RelativePath": "images/d6449f1d-b6f8-4e9b-9096-39d7ac7792f5_завантаження.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\d6449f1d-b6f8-4e9b-9096-39d7ac7792f5_завантаження.jfif"
     },
     {
       "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\default.jpg",
@@ -289,12 +340,12 @@
       "OriginalItemSpec": "wwwroot\\images\\default.jpg"
     },
     {
-      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\e2fd7aaf-6d34-458f-b1ed-ced50005920c_буквально я.jpg",
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\eb2d57ec-55dc-4c69-a7b2-97d7a07e3d08_photo_2023-06-06_17-52-31.jpg",
       "SourceId": "PlayAndConnect",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
       "BasePath": "_content/PlayAndConnect",
-      "RelativePath": "images/e2fd7aaf-6d34-458f-b1ed-ced50005920c_буквально я.jpg",
+      "RelativePath": "images/eb2d57ec-55dc-4c69-a7b2-97d7a07e3d08_photo_2023-06-06_17-52-31.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -303,15 +354,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\e2fd7aaf-6d34-458f-b1ed-ced50005920c_буквально я.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\eb2d57ec-55dc-4c69-a7b2-97d7a07e3d08_photo_2023-06-06_17-52-31.jpg"
     },
     {
-      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\ee04b719-7d62-4865-a8dd-df8765e468f4_буквально я.jpg",
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\f4ab898e-7fd1-4384-9367-a823f3de9f1d_photo_2022-10-13_03-32-17.jpg",
       "SourceId": "PlayAndConnect",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
       "BasePath": "_content/PlayAndConnect",
-      "RelativePath": "images/ee04b719-7d62-4865-a8dd-df8765e468f4_буквально я.jpg",
+      "RelativePath": "images/f4ab898e-7fd1-4384-9367-a823f3de9f1d_photo_2022-10-13_03-32-17.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -320,15 +371,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\ee04b719-7d62-4865-a8dd-df8765e468f4_буквально я.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\f4ab898e-7fd1-4384-9367-a823f3de9f1d_photo_2022-10-13_03-32-17.jpg"
     },
     {
-      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\fd8aa470-ed99-42bc-a463-9d25bf17d7a7_завантаження.jfif",
+      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\logo.png",
       "SourceId": "PlayAndConnect",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
       "BasePath": "_content/PlayAndConnect",
-      "RelativePath": "images/fd8aa470-ed99-42bc-a463-9d25bf17d7a7_завантаження.jfif",
+      "RelativePath": "images/logo.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -337,24 +388,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\fd8aa470-ed99-42bc-a463-9d25bf17d7a7_завантаження.jfif"
-    },
-    {
-      "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\images\\fdd46d01-9f10-4fb4-8a89-5636109b4398_буквально я.jpg",
-      "SourceId": "PlayAndConnect",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\",
-      "BasePath": "_content/PlayAndConnect",
-      "RelativePath": "images/fdd46d01-9f10-4fb4-8a89-5636109b4398_буквально я.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\fdd46d01-9f10-4fb4-8a89-5636109b4398_буквально я.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\logo.png"
     },
     {
       "Identity": "C:\\Users\\Олег\\Desktop\\PlayAndConnect\\wwwroot\\js\\form.js",

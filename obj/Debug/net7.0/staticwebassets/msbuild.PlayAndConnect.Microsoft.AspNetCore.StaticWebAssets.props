@@ -96,12 +96,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\18e364fd-babd-4f30-bc76-17d559d89743_вища математика.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\04e98869-5f47-4567-9f2f-4bbd32157bad_photo_2023-04-06_19-20-39jpg))">
       <SourceType>Package</SourceType>
       <SourceId>PlayAndConnect</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/PlayAndConnect</BasePath>
-      <RelativePath>images/18e364fd-babd-4f30-bc76-17d559d89743_вища математика.jpg</RelativePath>
+      <RelativePath>images/04e98869-5f47-4567-9f2f-4bbd32157bad_photo_2023-04-06_19-20-39jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -110,14 +110,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\18e364fd-babd-4f30-bc76-17d559d89743_вища математика.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\04e98869-5f47-4567-9f2f-4bbd32157bad_photo_2023-04-06_19-20-39jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\27621f15-7e3a-422f-be89-3fefb7c9ac58_най поки побуде авою.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\05e52893-a83d-4eba-9a6e-4bb921c6aaf0_photo_2023-06-06_17-52-31.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>PlayAndConnect</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/PlayAndConnect</BasePath>
-      <RelativePath>images/27621f15-7e3a-422f-be89-3fefb7c9ac58_най поки побуде авою.jpg</RelativePath>
+      <RelativePath>images/05e52893-a83d-4eba-9a6e-4bb921c6aaf0_photo_2023-06-06_17-52-31.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -126,14 +126,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\27621f15-7e3a-422f-be89-3fefb7c9ac58_най поки побуде авою.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\05e52893-a83d-4eba-9a6e-4bb921c6aaf0_photo_2023-06-06_17-52-31.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\2bcee9a8-1bb4-46e4-bd38-14f929d8a8f4_аутизм.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\27e8efa8-d061-44ce-8575-5fc75e37c4f9_photo_2023-06-06_17-52-31.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>PlayAndConnect</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/PlayAndConnect</BasePath>
-      <RelativePath>images/2bcee9a8-1bb4-46e4-bd38-14f929d8a8f4_аутизм.jpg</RelativePath>
+      <RelativePath>images/27e8efa8-d061-44ce-8575-5fc75e37c4f9_photo_2023-06-06_17-52-31.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -142,14 +142,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\2bcee9a8-1bb4-46e4-bd38-14f929d8a8f4_аутизм.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\27e8efa8-d061-44ce-8575-5fc75e37c4f9_photo_2023-06-06_17-52-31.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\51b00d1c-0058-4fa1-a5e4-2cd87672eb27_photo_2022-10-13_03-32-17.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\40efaf05-e9dd-4609-9a1b-335c8796666e_буквально я.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>PlayAndConnect</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/PlayAndConnect</BasePath>
-      <RelativePath>images/51b00d1c-0058-4fa1-a5e4-2cd87672eb27_photo_2022-10-13_03-32-17.jpg</RelativePath>
+      <RelativePath>images/40efaf05-e9dd-4609-9a1b-335c8796666e_буквально я.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -158,14 +158,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\51b00d1c-0058-4fa1-a5e4-2cd87672eb27_photo_2022-10-13_03-32-17.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\40efaf05-e9dd-4609-9a1b-335c8796666e_буквально я.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\61f7fe30-36b1-4077-9d02-2856acffd6f3_новий рік.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\69dd5f43-6883-49c1-b495-52b20739c8c8_photo_2023-06-06_17-52-31.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>PlayAndConnect</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/PlayAndConnect</BasePath>
-      <RelativePath>images/61f7fe30-36b1-4077-9d02-2856acffd6f3_новий рік.jpg</RelativePath>
+      <RelativePath>images/69dd5f43-6883-49c1-b495-52b20739c8c8_photo_2023-06-06_17-52-31.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -174,14 +174,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\61f7fe30-36b1-4077-9d02-2856acffd6f3_новий рік.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\69dd5f43-6883-49c1-b495-52b20739c8c8_photo_2023-06-06_17-52-31.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\84a8e0c9-0070-4e2d-b2a8-9292eeb4edb9_най поки побуде авою.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\6eecf1a0-75cf-47ad-81f4-fb0d0a8a84c9_photo_2023-06-06_17-52-31.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>PlayAndConnect</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/PlayAndConnect</BasePath>
-      <RelativePath>images/84a8e0c9-0070-4e2d-b2a8-9292eeb4edb9_най поки побуде авою.jpg</RelativePath>
+      <RelativePath>images/6eecf1a0-75cf-47ad-81f4-fb0d0a8a84c9_photo_2023-06-06_17-52-31.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -190,14 +190,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\84a8e0c9-0070-4e2d-b2a8-9292eeb4edb9_най поки побуде авою.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\6eecf1a0-75cf-47ad-81f4-fb0d0a8a84c9_photo_2023-06-06_17-52-31.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\ba70bbc0-55ae-4f9f-b3c8-79c365b06453_завантаження.jfif))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\7321e23f-2f55-4184-9bd7-918e800a8fd8_вища математика.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>PlayAndConnect</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/PlayAndConnect</BasePath>
-      <RelativePath>images/ba70bbc0-55ae-4f9f-b3c8-79c365b06453_завантаження.jfif</RelativePath>
+      <RelativePath>images/7321e23f-2f55-4184-9bd7-918e800a8fd8_вища математика.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -206,7 +206,55 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\ba70bbc0-55ae-4f9f-b3c8-79c365b06453_завантаження.jfif))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\7321e23f-2f55-4184-9bd7-918e800a8fd8_вища математика.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\910b4331-e276-4c9e-9ca6-8d1354fa2015_unnamed.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>PlayAndConnect</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/PlayAndConnect</BasePath>
+      <RelativePath>images/910b4331-e276-4c9e-9ca6-8d1354fa2015_unnamed.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\910b4331-e276-4c9e-9ca6-8d1354fa2015_unnamed.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\d025c901-e4b9-43a4-90e2-a986e8446f91_буквально я.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>PlayAndConnect</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/PlayAndConnect</BasePath>
+      <RelativePath>images/d025c901-e4b9-43a4-90e2-a986e8446f91_буквально я.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\d025c901-e4b9-43a4-90e2-a986e8446f91_буквально я.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\d6449f1d-b6f8-4e9b-9096-39d7ac7792f5_завантаження.jfif))">
+      <SourceType>Package</SourceType>
+      <SourceId>PlayAndConnect</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/PlayAndConnect</BasePath>
+      <RelativePath>images/d6449f1d-b6f8-4e9b-9096-39d7ac7792f5_завантаження.jfif</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\d6449f1d-b6f8-4e9b-9096-39d7ac7792f5_завантаження.jfif))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\default.jpg))">
       <SourceType>Package</SourceType>
@@ -224,12 +272,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\default.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\e2fd7aaf-6d34-458f-b1ed-ced50005920c_буквально я.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\eb2d57ec-55dc-4c69-a7b2-97d7a07e3d08_photo_2023-06-06_17-52-31.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>PlayAndConnect</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/PlayAndConnect</BasePath>
-      <RelativePath>images/e2fd7aaf-6d34-458f-b1ed-ced50005920c_буквально я.jpg</RelativePath>
+      <RelativePath>images/eb2d57ec-55dc-4c69-a7b2-97d7a07e3d08_photo_2023-06-06_17-52-31.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -238,14 +286,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\e2fd7aaf-6d34-458f-b1ed-ced50005920c_буквально я.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\eb2d57ec-55dc-4c69-a7b2-97d7a07e3d08_photo_2023-06-06_17-52-31.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\ee04b719-7d62-4865-a8dd-df8765e468f4_буквально я.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\f4ab898e-7fd1-4384-9367-a823f3de9f1d_photo_2022-10-13_03-32-17.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>PlayAndConnect</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/PlayAndConnect</BasePath>
-      <RelativePath>images/ee04b719-7d62-4865-a8dd-df8765e468f4_буквально я.jpg</RelativePath>
+      <RelativePath>images/f4ab898e-7fd1-4384-9367-a823f3de9f1d_photo_2022-10-13_03-32-17.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -254,14 +302,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\ee04b719-7d62-4865-a8dd-df8765e468f4_буквально я.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\f4ab898e-7fd1-4384-9367-a823f3de9f1d_photo_2022-10-13_03-32-17.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\fd8aa470-ed99-42bc-a463-9d25bf17d7a7_завантаження.jfif))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\logo.png))">
       <SourceType>Package</SourceType>
       <SourceId>PlayAndConnect</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/PlayAndConnect</BasePath>
-      <RelativePath>images/fd8aa470-ed99-42bc-a463-9d25bf17d7a7_завантаження.jfif</RelativePath>
+      <RelativePath>images/logo.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -270,23 +318,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\fd8aa470-ed99-42bc-a463-9d25bf17d7a7_завантаження.jfif))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\fdd46d01-9f10-4fb4-8a89-5636109b4398_буквально я.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>PlayAndConnect</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/PlayAndConnect</BasePath>
-      <RelativePath>images/fdd46d01-9f10-4fb4-8a89-5636109b4398_буквально я.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\fdd46d01-9f10-4fb4-8a89-5636109b4398_буквально я.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\logo.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\js\form.js))">
       <SourceType>Package</SourceType>

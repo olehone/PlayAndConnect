@@ -1,6 +1,152 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
+    Layout = ViewBag.Layout;
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'><link rel="stylesheet" href="chat.css">
+    
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="faq.css" />
+    <link rel="stylesheet" href="phone.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body>
+    <script src="phone.js"></script>
+
+    <div class="accordion">
+      
+<h1>@ViewData["Title"]</h1>
+<p>At Play&Connect, we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website and services. By accessing or using Play&Connect, you agree to the terms of this Privacy Policy.</p>
+<h3>Information We Collect</h3>
+<p>1.1 Personal Information: We may collect personally identifiable information, such as your name, email address, and contact information when you register for an account or use our services. You have the choice to provide this information voluntarily, but certain features or services may not be available if you choose not to provide it.</p>
+<p>1.2 Usage Data: We automatically collect certain information when you visit our website or use our services. This may include your IP address, browser type, device information, pages visited, and the time and date of your visit.</p>
+<p>1.3 Cookies: We may use cookies and similar tracking technologies to enhance your experience on our website. These technologies help us analyze trends, administer the website, track users' movements, and gather demographic information.</p>
+<h3>How We Use Your Information</h3>
+<p>2.1 Provide and Improve Services: We may use your information to provide and personalize our services, improve our website's functionality, and deliver a better user experience. This includes troubleshooting, data analysis, and research purposes.</p>
+<p>2.2 Communication: We may use your contact information to communicate with you about your account, provide important updates, and respond to your inquiries or feedback.</p>
+<p>2.3 Marketing: With your consent, we may send you promotional materials or notifications about new features, products, or special offers. You can opt out of receiving these communications at any time.</p>
+<p>2.4 Legal Obligations: We may use or disclose your information to comply with applicable laws, regulations, legal processes, or enforceable governmental requests.</p>
+<h3>Data Sharing and Disclosure</h3>
+<p>3.1 Third-Party Service Providers: We may share your information with trusted third-party service providers to perform certain functions or services on our behalf. These providers are obligated to protect your information and are prohibited from using it for any other purpose.</p>
+<p>3.2 Business Transfers: If Play&Connect is involved in a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction. We will notify you via email or prominent notice on our website if such a transfer occurs.</p>
+<p>3.3 Legal Requirements: We may disclose your information if required to do so by law or in response to valid legal requests from public authorities.</p>
+<h3>Data Security</h3>
+<p>We implement appropriate security measures to protect your information from unauthorized access, alteration, disclosure, or destruction. However, please note that no method of transmission over the internet or electronic storage is 100% secure. We cannot guarantee the absolute security of your data.</p>
+<h3>Your Choices</h3>
+<p>You have the right to control and manage your personal information. You may review, update, or delete your account information by logging into your account settings or contacting us directly. You can also choose to disable cookies through your browser settings, although this may affect your ability to access certain features of our website.</p>
+<h3>Children's Privacy</h3>
+<p>Play&Connect is not intended for use by individuals under the age of 13. We do not knowingly collect personal information from children. If we become aware that we have collected information from a child under 13, we will take immediate steps to delete the information from our servers.</p>
+<h3>Changes to This Privacy Policy</h3>
+<p>We reserve the right to update or modify this Privacy Policy at any time without prior notice. Any changes will be effective immediately upon posting the updated Privacy Policy on our website. Your continued use of Play&Connect after any modifications will constitute your acknowledgment of the changes and your consent to abide and be bound by them.</p>   
+    </div>
+
+
+
+  </body>
+</html>
+<style>
+    .pb-3{
+        margin-top: 100px;
+    }
+    body{
+}
+h1{
+  font-size: 60px
+}
+ .accordion{
+  width: 90%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+ }
+
+ .accordion li{
+  list-style: none;
+  width: 93%;
+  margin: 10px;
+  color: #385a7b;
+  border-radius: 40px;
+  background: #7e9fc4;
+ }
+
+.accordion li label{
+  display:flex;
+  height:80px;
+  align-items: center;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+label::before{
+  content:'+';
+  margin-right: 25px;
+  margin-left: 25px;
+  margin-top: -9px;
+  
+  font-size: 70px;
+  font-weight: bold;
+
+}
+
+.open{
+  display:none;
+}
+.accordion .content{
+  color: #7e9fc4;
+  display:flex;
+  align-items: center;
+  background: #ffffff;
+
+  padding:0 10px;
+  line-height: 26px;
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.5s;
+  border-radius: 0 0 40px 40px;
+  box-shadow: 6px 6px 10px -1px rgba(0,0,0, 0.15);
+
+
+}
+
+.content::before{
+  content: '-';
+  font-size: 70px;
+  font-weight: bold;
+  margin-right: 36px;
+  margin-left: 36px;
+}
+
+.open:checked + label + .content{
+  max-height: 400px;
+  padding: 10px 10px 20px;
+}
+
+.open:not(:checked) + label + .content{
+  max-height: 0px;
+  padding: 0;
+}
+
+.faq{
+  margin-top: 60px;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  color: #385a7b;
+}
+
+.answer{
+  margin-top: 15px;
+}
+</style>

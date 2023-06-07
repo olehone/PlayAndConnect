@@ -8,8 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
+//Впровадження залежностей
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IUserDb, UserDb>();
+builder.Services.AddTransient<IInfoDb, InfoDb>();
+builder.Services.AddTransient<IGameDb, GameDb>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 32));
@@ -23,7 +26,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
             .LogTo(Console.WriteLine, LogLevel.Information) //це
         .EnableSensitiveDataLogging()                       //потім 
         .EnableDetailedErrors()                             //видалити
-        );
+        );//, ServiceLifetime.Singleton);                        //це може викликати проблеми з багатопотоковістю
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

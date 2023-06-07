@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Account";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <style>
         .user-info {
             display: flex;
@@ -17,6 +16,8 @@
         .user-image {
             width: 50px;
             height: 50px;
+            margin-bottom: auto;
+            padding: 5px;
             border-radius: 50%;
             object-fit: cover;
             margin-right: 10px;
@@ -31,7 +32,7 @@
     <div class="user-info">
         <img class="user-image" src="@ViewBag.imagePath">
         <div class="user-details">
-            <p>User: @ViewBag.login</p>
+            <p>Login: @ViewBag.login</p>
             <p>Username: @ViewBag.username</p>
             <p>Age: @ViewBag.age</p>
             <p>Description : @ViewBag.description</p>
